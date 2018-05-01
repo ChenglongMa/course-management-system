@@ -12,6 +12,7 @@ public abstract class Staff extends User{
                 pasts.add(enrolments.get(i));
             }
         }
+
         return pasts;
     }
 
