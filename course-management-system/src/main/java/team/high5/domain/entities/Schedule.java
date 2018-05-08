@@ -1,4 +1,4 @@
-package team.high5;
+package team.high5.domain.entities;
 
 import com.sun.org.apache.xpath.internal.operations.Equals;
 
@@ -24,9 +24,9 @@ public class Schedule extends Equals {
         return schId;
     }
 
-    public void setSchId(int schId) {
-        this.schId = schId;
-    }
+//    public void setSchId(int schId) {
+//        this.schId = schId;
+//    }
 
     public int getYear() {
         return year;

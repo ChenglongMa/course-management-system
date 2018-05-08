@@ -1,4 +1,6 @@
-package team.high5;
+package team.high5.domain.entities;
+
+import team.high5.domain.user.Student;
 
 public class Enrolment {
     private int enrolId;

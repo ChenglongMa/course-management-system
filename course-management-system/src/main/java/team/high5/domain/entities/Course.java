@@ -1,4 +1,4 @@
-package team.high5;
+package team.high5.domain.entities;
 
 import java.util.List;
 
