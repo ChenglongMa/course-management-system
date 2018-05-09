@@ -10,6 +10,12 @@ import team.high5.service.AdminService;
 
 import java.util.List;
 
+/**
+ * @Author : Charles Ma
+ * @Date : 2018/5/9 0009
+ * @Time : 14:50
+ * @Description : AdminController
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -24,6 +30,17 @@ public class AdminController {
     @GetMapping("/")
     @ResponseBody
     public List<Admin> getAdmins() {
-        return adminService.getAdmin();
+        return adminService.get();
+    }
+
+    @GetMapping("/create")
+//    @PostMapping("/create")
+    @ResponseBody
+    public Admin postAdmin() {
+        Admin a = new Admin();
+        a.setUserId("e1001");
+        a.setName("Tom");
+        a.setPassword("123");
+        return adminService.insert(a);
     }
 }

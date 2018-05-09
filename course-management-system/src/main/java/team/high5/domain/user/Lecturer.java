@@ -8,9 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.List;
 
+/**
+ * @Author : Charles Ma
+ * @Date : 2018/5/9 0009
+ * @Time : 14:48
+ * @Description : Lecturer
+ */
 @Entity
 @Table(name = "lecturer")
-public class Lecturer extends User {
+public class Lecturer extends Staff {
     public void uploadResult(Student student, String result) throws NullPointerException {
         List<Enrolment> enrolments = student.getPerformance();
         Enrolment enrolment = null;

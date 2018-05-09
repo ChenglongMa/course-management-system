@@ -4,16 +4,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//@Entity
+/**
+ * @Author : Charles Ma
+ * @Date : 2018/5/9 0009
+ * @Time : 14:49
+ * @Description : User
+ */
+@MappedSuperclass
 public abstract class User {
+    @Transient
+    protected static final Logger logger = LoggerFactory.getLogger(User.class);
     @Id
     @Column(name = "userId")
     private String userId;
@@ -21,16 +29,6 @@ public abstract class User {
     private String name;
     @Column(name = "password")
     private String password;
-
-    @Transient
-    protected static final Logger logger = LoggerFactory.getLogger(User.class);
-
-    private boolean isIllegal(String str) {
-        String regEx = "[ _`~!@#$%^&*()+=|{}':;,\\[\\].<>/?！￥…（）—【】‘；：”“’。，、？]|\n|\r|\t";
-        Pattern p = Pattern.compile(regEx);
-        Matcher m = p.matcher(str);
-        return m.find();
-    }
 
     /**
      * Encodes a string to MD5
@@ -55,9 +53,16 @@ public abstract class User {
                 }
             }
         } catch (NoSuchAlgorithmException e) {
-            logger.error("This string cannot be encrypted to md5",str);
+            logger.error("This string cannot be encrypted to md5", str);
         }
         return hexString.toString();
+    }
+
+    private boolean isIllegal(String str) {
+        String regEx = "[ _`~!@#$%^&*()+=|{}':;,\\[\\].<>/?！￥…（）—【】‘；：”“’。，、？]|\n|\r|\t";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        return m.find();
     }
 
     public String getUserId() {

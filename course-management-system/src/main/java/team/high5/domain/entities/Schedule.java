@@ -4,9 +4,21 @@ import com.sun.org.apache.xpath.internal.operations.Equals;
 
 import javax.persistence.*;
 
+/**
+ * @Author : Charles Ma
+ * @Date : 2018/5/9 0009
+ * @Time : 14:48
+ * @Description : Schedule
+ */
 @Entity
 @Table(name = "schedule")
 public class Schedule extends Equals {
+    @Transient
+    private static final int SEMESTER_COUNT = 2;
+    @Transient
+    private static final int WEEK_COUNT = 12;
+    @Transient
+    private static Schedule currentSchedule = new Schedule();
     @Id
     @Column(name = "schId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,12 +29,6 @@ public class Schedule extends Equals {
     private int semester;
     @Column(name = "week")
     private int week;
-    @Transient
-    private static final int SEMESTER_COUNT = 2;
-    @Transient
-    private static final int WEEK_COUNT = 12;
-    @Transient
-    private static Schedule currentSchedule = new Schedule();
 
     /**
      * Returns the current schedule

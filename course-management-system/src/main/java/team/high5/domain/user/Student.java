@@ -7,6 +7,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Author : Charles Ma
+ * @Date : 2018/5/9 0009
+ * @Time : 14:48
+ * @Description : Student
+ */
 @Entity
 @Table(name = "student")
 public class Student extends User {

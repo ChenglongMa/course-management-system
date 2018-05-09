@@ -1,13 +1,18 @@
 package team.high5.service;
 
-import org.springframework.stereotype.Service;
-import team.high5.domain.entities.CourseOffering;
 import team.high5.domain.user.Admin;
-import team.high5.domain.user.Lecturer;
 
 import java.util.List;
 
+/**
+ * @Author : Charles Ma
+ * @Date : 2018/5/9 0009
+ * @Time : 14:50
+ * @Description : AdminService
+ */
 public interface AdminService {
 
-    List<Admin> getAdmin();
+    List<Admin> get();
+
+    Admin insert(Admin admin);
 }

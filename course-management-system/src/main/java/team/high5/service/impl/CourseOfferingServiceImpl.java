@@ -6,6 +6,12 @@ import team.high5.domain.user.Lecturer;
 import team.high5.repository.CourseOfferingRepo;
 import team.high5.service.CourseOfferingService;
 
+/**
+ * @Author : Charles Ma
+ * @Date : 2018/5/9 0009
+ * @Time : 14:50
+ * @Description : CourseOfferingServiceImpl
+ */
 public class CourseOfferingServiceImpl implements CourseOfferingService {
     private final CourseOfferingRepo offeringRepo;
 
@@ -21,6 +27,7 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
         }
         return offering;
     }
+
 
     @Override
     public CourseOffering assignLecturer(Lecturer lecturer) {

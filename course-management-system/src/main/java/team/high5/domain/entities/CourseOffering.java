@@ -4,6 +4,12 @@ import team.high5.domain.user.Lecturer;
 
 import javax.persistence.*;
 
+/**
+ * @Author : Charles Ma
+ * @Date : 2018/5/9 0009
+ * @Time : 14:46
+ * @Description :
+ */
 @Entity
 @Table(name = "courseoffering")
 public class CourseOffering {

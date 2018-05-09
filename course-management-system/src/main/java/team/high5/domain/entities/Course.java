@@ -3,6 +3,12 @@ package team.high5.domain.entities;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * @Author : Charles Ma
+ * @Date : 2018/5/9 0009
+ * @Time : 14:45
+ * @Description :
+ */
 @Entity
 @Table(name = "course")
 public class Course {
@@ -16,7 +22,7 @@ public class Course {
     @ManyToMany(cascade = CascadeType.MERGE)
     private List<Course> prerequisites;
 
-    @OneToMany(mappedBy = "code")
+    @OneToMany(mappedBy = "OfferingId")
     private List<CourseOffering> courseOfferings;
 
     public String getCode() {
