@@ -1,6 +1,12 @@
 package team.high5;
 
 import org.junit.*;
+import team.high5.domain.entities.CourseOffering;
+import team.high5.domain.entities.Enrolment;
+import team.high5.domain.entities.Schedule;
+import team.high5.domain.user.Lecturer;
+import team.high5.domain.user.Student;
+
 
 import java.util.ArrayList;
 import java.util.List;

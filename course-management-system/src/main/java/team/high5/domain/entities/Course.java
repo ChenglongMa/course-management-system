@@ -1,12 +1,23 @@
 package team.high5.domain.entities;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "course")
 public class Course {
+    @Id
+    @Column(name = "code")
     private String code;
+    @Column(name = "name")
     private String name;
+    @Column(name = "mainTopic")
     private String mainTopic;
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Course> prerequisites;
+
+    @OneToMany(mappedBy = "code")
+    private List<CourseOffering> courseOfferings;
 
     public String getCode() {
         return code;
@@ -38,5 +49,13 @@ public class Course {
 
     public void setPrerequisites(List<Course> prerequisites) {
         this.prerequisites = prerequisites;
+    }
+
+    public List<CourseOffering> getCourseOfferings() {
+        return courseOfferings;
+    }
+
+    public void setCourseOfferings(List<CourseOffering> courseOfferings) {
+        this.courseOfferings = courseOfferings;
     }
 }

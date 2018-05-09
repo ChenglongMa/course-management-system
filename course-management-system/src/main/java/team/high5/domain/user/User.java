@@ -6,12 +6,13 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Entity
+//@Entity
 public abstract class User {
     @Id
     @Column(name = "userId")
@@ -21,6 +22,7 @@ public abstract class User {
     @Column(name = "password")
     private String password;
 
+    @Transient
     protected static final Logger logger = LoggerFactory.getLogger(User.class);
 
     private boolean isIllegal(String str) {

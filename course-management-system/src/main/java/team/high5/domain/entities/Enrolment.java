@@ -2,10 +2,22 @@ package team.high5.domain.entities;
 
 import team.high5.domain.user.Student;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "enrolment")
 public class Enrolment {
+    @Id
+    @Column(name = "enrolId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int enrolId;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "userId")
     private Student student;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "OfferingId")
     private CourseOffering offering;
+    @Column(name = "result")
     private String result = "RNF";
 
     public int getEnrolId() {

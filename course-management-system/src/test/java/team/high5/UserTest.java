@@ -1,12 +1,13 @@
 package team.high5;
 
 import org.junit.*;
+import team.high5.domain.user.User;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+
+import static org.junit.Assert.assertEquals;
 
 public class UserTest {
-    static class innerUser extends User{
+    static class innerUser extends User {
 
     }
 

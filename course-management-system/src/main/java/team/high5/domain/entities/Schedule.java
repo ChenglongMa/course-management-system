@@ -2,13 +2,26 @@ package team.high5.domain.entities;
 
 import com.sun.org.apache.xpath.internal.operations.Equals;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "schedule")
 public class Schedule extends Equals {
+    @Id
+    @Column(name = "schId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int schId;
+    @Column(name = "year")
     private int year;
+    @Column(name = "semester")
     private int semester;
+    @Column(name = "week")
     private int week;
+    @Transient
     private static final int SEMESTER_COUNT = 2;
+    @Transient
     private static final int WEEK_COUNT = 12;
+    @Transient
     private static Schedule currentSchedule = new Schedule();
 
     /**
@@ -24,9 +37,9 @@ public class Schedule extends Equals {
         return schId;
     }
 
-//    public void setSchId(int schId) {
-//        this.schId = schId;
-//    }
+    public void setSchId(int schId) {
+        this.schId = schId;
+    }
 
     public int getYear() {
         return year;

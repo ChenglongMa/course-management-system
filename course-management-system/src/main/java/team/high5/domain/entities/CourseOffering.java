@@ -2,11 +2,27 @@ package team.high5.domain.entities;
 
 import team.high5.domain.user.Lecturer;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "courseoffering")
 public class CourseOffering {
+    @Column(name = "OfferingId")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int OfferingId;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "code")
     private Course course;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "userId")
     private Lecturer lecturer;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "schId")
     private Schedule schedule;
+    @Column(name = "capacity")
     private int capacity;
 
     public int getOfferingId() {
@@ -56,7 +72,7 @@ public class CourseOffering {
 
     public void setCapacity(int capacity) {
         if (capacity <= 0) {
-            throw new IllegalArgumentException("capacity should greater than 0");
+            throw new IllegalArgumentException("Capacity should greater than 0");
         }
         this.capacity = capacity;
     }

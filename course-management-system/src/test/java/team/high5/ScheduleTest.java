@@ -3,6 +3,8 @@ package team.high5;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import team.high5.domain.entities.Schedule;
+
 
 import static org.mockito.Mockito.*;
 

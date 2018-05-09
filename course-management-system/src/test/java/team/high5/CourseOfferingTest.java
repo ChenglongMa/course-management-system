@@ -1,6 +1,10 @@
 package team.high5;
 
 import org.junit.*;
+import team.high5.domain.entities.Course;
+import team.high5.domain.entities.CourseOffering;
+import team.high5.domain.entities.Schedule;
+import team.high5.domain.user.Lecturer;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -34,13 +38,6 @@ public class CourseOfferingTest {
     @After
     public void tearDown() throws Exception {
         offering = null;
-    }
-
-    @Test
-    public void getOfferingId() {
-        int id = 1;
-        offering.setOfferingId(id);
-        assertEquals(id, offering.getOfferingId());
     }
 
     @Test
