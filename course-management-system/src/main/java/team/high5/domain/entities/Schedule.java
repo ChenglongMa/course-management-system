@@ -71,7 +71,15 @@ public class Schedule extends Equals {
         this.week = week;
     }
 
-    public Schedule advance() {
+    public static void setCurrentSchedule(Schedule currentSchedule) {
+        Schedule.currentSchedule = currentSchedule;
+    }
+
+    /**
+     * Advance the system to next week or next semester.
+     * @return the current schedule
+     */
+    public static Schedule advance() {
         int week = currentSchedule.getWeek();
         if (week <= 0)
             throw new IllegalArgumentException(String.format("Wrong Week: %s", week));

@@ -10,7 +10,5 @@ import team.high5.domain.user.Lecturer;
  * @Description : CourseOfferingService
  */
 public interface CourseOfferingService {
-    CourseOffering addCourseOffering(CourseOffering offering);
 
-    CourseOffering assignLecturer(Lecturer lecturer);
 }

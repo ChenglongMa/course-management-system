@@ -8,7 +8,6 @@ import team.high5.domain.user.Student;
  * @Time : 14:50
  * @Description : LecturerService
  */
-public interface LecturerService extends StaffService {
+public interface LecturerService /*extends StaffService*/ {
     boolean uploadResult(Student student, String result);
-
 }

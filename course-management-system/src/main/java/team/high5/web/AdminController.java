@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Admin;
 import team.high5.service.AdminService;
 
@@ -42,5 +43,12 @@ public class AdminController {
         a.setName("Tom");
         a.setPassword("123");
         return adminService.insert(a);
+    }
+
+    @GetMapping("/advance")
+    @ResponseBody
+    public Schedule advanceSystem() {
+        adminService.advanceSystem();
+        return Schedule.currentSchedule();
     }
 }

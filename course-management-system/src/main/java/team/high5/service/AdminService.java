@@ -1,6 +1,8 @@
 package team.high5.service;
 
+import team.high5.domain.entities.CourseOffering;
 import team.high5.domain.user.Admin;
+import team.high5.domain.user.Lecturer;
 
 import java.util.List;
 
@@ -15,4 +17,9 @@ public interface AdminService {
     List<Admin> get();
 
     Admin insert(Admin admin);
+
+    CourseOffering addCourseOffering(CourseOffering offering);
+
+    CourseOffering assignLecturer(CourseOffering offering,Lecturer lecturer);
+    void advanceSystem();
 }

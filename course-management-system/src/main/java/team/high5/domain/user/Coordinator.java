@@ -12,7 +12,5 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "coordinator")
 public class Coordinator extends User {
-    public void grantPermission(Student student) {
 
-    }
 }

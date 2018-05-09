@@ -1,10 +1,8 @@
 package team.high5.domain.user;
 
 import team.high5.domain.entities.Enrolment;
-import team.high5.domain.entities.Schedule;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,15 +44,5 @@ public class Student extends User {
 
     public void setPerformance(List<Enrolment> performance) {
         this.performance = performance;
-    }
-
-    public List<Enrolment> viewPastPerformance() {
-        List<Enrolment> pasts = new ArrayList<>();
-        for (Enrolment enrolment : performance) {
-            if (!enrolment.getOffering().getSchedule().equals(Schedule.currentSchedule())) {
-                pasts.add(enrolment);
-            }
-        }
-        return pasts;
     }
 }
