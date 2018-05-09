@@ -10,6 +10,7 @@ import team.high5.domain.entities.Schedule;
  * @Time : 15:07
  * @Description : TODO: To be checked.
  */
+
 public interface ScheduleService {
     Schedule findCurrentSchedule();
 

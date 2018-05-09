@@ -12,7 +12,7 @@ import java.util.List;
  * @Time : 14:50
  * @Description : AdminService
  */
-public interface AdminService {
+public interface AdminService extends StaffService {
 
     List<Admin> get();
 

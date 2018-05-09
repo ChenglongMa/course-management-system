@@ -17,9 +17,9 @@ import java.util.List;
  * @Description : StaffServiceImpl
  */
 @Service
-public class StaffServiceImpl implements StaffService {
-    private final StudentRepo studentRepo;
-    private final EnrolmentRepo enrolmentRepo;
+public abstract class StaffServiceImpl implements StaffService {
+    protected final StudentRepo studentRepo;
+    protected final EnrolmentRepo enrolmentRepo;
 
     @Autowired
     public StaffServiceImpl(StudentRepo studentRepo, EnrolmentRepo enrolmentRepo) {

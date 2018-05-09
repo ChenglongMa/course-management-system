@@ -1,5 +1,6 @@
 package team.high5.service;
 
+import team.high5.domain.entities.CourseOffering;
 import team.high5.domain.user.Student;
 
 /**
@@ -12,4 +13,6 @@ import team.high5.domain.user.Student;
  */
 public interface StudentService {
     Student findOne(String id);
+
+    boolean enrol(Student student, CourseOffering offering);
 }

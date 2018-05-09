@@ -1,6 +1,7 @@
 package team.high5.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import team.high5.domain.entities.Schedule;
 import team.high5.repository.ScheduleRepo;
 import team.high5.service.ScheduleService;
@@ -13,7 +14,7 @@ import team.high5.service.ScheduleService;
  * @Time : 15:08
  * @Description :
  */
-@Deprecated
+@Service
 public class ScheduleServiceImpl implements ScheduleService {
 
     private final ScheduleRepo scheduleRepo;

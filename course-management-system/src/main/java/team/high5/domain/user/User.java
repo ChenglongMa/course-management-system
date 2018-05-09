@@ -1,5 +1,6 @@
 package team.high5.domain.user;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
  * @Description : User
  */
 @MappedSuperclass
-public abstract class User {
+public abstract class User extends Equals {
     @Transient
     protected static final Logger logger = LoggerFactory.getLogger(User.class);
     @Id
@@ -94,5 +95,15 @@ public abstract class User {
             throw new IllegalArgumentException("Reusing passwords");
         }
         this.password = toMD5(password);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean res = super.equals(obj);
+        if (!res) {
+            return false;
+        }
+        User other = (User) obj;
+        return this.name.equals(other.name);
     }
 }

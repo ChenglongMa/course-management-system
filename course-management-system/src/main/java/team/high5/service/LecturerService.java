@@ -1,5 +1,6 @@
 package team.high5.service;
 
+import team.high5.domain.user.Lecturer;
 import team.high5.domain.user.Student;
 
 /**
@@ -8,6 +9,6 @@ import team.high5.domain.user.Student;
  * @Time : 14:50
  * @Description : LecturerService
  */
-public interface LecturerService /*extends StaffService*/ {
-    boolean uploadResult(Student student, String result);
+public interface LecturerService extends StaffService {
+    boolean uploadResult(Lecturer lecturer, Student student, String result);
 }
