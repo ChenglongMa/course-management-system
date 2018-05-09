@@ -8,7 +8,7 @@ import team.high5.domain.entities.Schedule;
  * @Author : Charles Ma
  * @Date : 09-05-2018
  * @Time : 15:07
- * @Description : TODO: To be checked.
+ * @Description :
  */
 
 public interface ScheduleService {

@@ -2,6 +2,9 @@ package team.high5.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import team.high5.domain.entities.CourseOffering;
+import team.high5.domain.entities.Schedule;
+
+import java.util.List;
 
 /**
  * @Author : Charles Ma
@@ -10,4 +13,5 @@ import team.high5.domain.entities.CourseOffering;
  * @Description : CourseOfferingRepo
  */
 public interface CourseOfferingRepo extends JpaRepository<CourseOffering, Integer> {
+    List<CourseOffering> findCourseOfferingsBySchedule(Schedule schedule);
 }

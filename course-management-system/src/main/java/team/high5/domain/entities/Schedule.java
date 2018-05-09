@@ -18,7 +18,7 @@ public class Schedule extends Equals {
     @Transient
     private static final int WEEK_COUNT = 12;
     @Transient
-    private static Schedule currentSchedule = new Schedule();
+    private static Schedule currentSchedule = null;
     @Id
     @Column(name = "schId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +36,9 @@ public class Schedule extends Equals {
      * @return
      */
     public static Schedule currentSchedule() {
+        if (currentSchedule == null) {
+            throw new NullPointerException("Need to be updated from database.");
+        }
         return currentSchedule;
     }
 

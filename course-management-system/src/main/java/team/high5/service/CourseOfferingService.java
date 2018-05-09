@@ -1,7 +1,11 @@
 package team.high5.service;
 
+import team.high5.domain.entities.Course;
 import team.high5.domain.entities.CourseOffering;
+import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Lecturer;
+
+import java.util.List;
 
 /**
  * @Author : Charles Ma
@@ -10,5 +14,11 @@ import team.high5.domain.user.Lecturer;
  * @Description : CourseOfferingService
  */
 public interface CourseOfferingService {
+    Lecturer findLecturer(CourseOffering offering);
 
+    Course findCourse(CourseOffering offering);
+
+    Schedule findSchedule(CourseOffering offering);
+
+    List<CourseOffering> findOfferingsInCurrentSemester();
 }

@@ -14,6 +14,7 @@ import team.high5.service.ScheduleService;
 import team.high5.service.StaffService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Author : Charles Ma
@@ -25,8 +26,6 @@ import java.util.List;
 public class LecturerServiceImpl implements LecturerService {
 
     private final StudentRepo studentRepo;
-    // TODO: 2018/5/9 0009 未完成
-
     private final ScheduleService scheduleService;
     private final StaffService staffService;
 
@@ -41,7 +40,12 @@ public class LecturerServiceImpl implements LecturerService {
 
     @Override
     public boolean uploadResult(Lecturer lecturer, Student student, String result) throws NullPointerException {
-        List<Enrolment> enrolments = studentRepo.findEnrolments(student);
+        Optional<Student> op = studentRepo.findById(student.getUserId());
+        if (!op.isPresent()) {
+            throw new IllegalArgumentException("There is no such student.");
+        }
+        Student stu = op.get();
+        List<Enrolment> enrolments = stu.getPerformance();
         Schedule currentSchedule = scheduleService.findCurrentSchedule();
         Enrolment enrolment = null;
         for (Enrolment e : enrolments) {
