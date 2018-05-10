@@ -12,23 +12,25 @@ The project has been greatly changed, including that:
 ## Project Structure
 
 team
-  +- high5
-      +- CourseManagementSystemApplication.java
+ +- high5
+    +- CourseManagementSystemApplication.java  
       |
       +- domain
       |  +- Admin.java
       |  +- Student.java
       |  +- ...
-       +- repository
+      
+      +- repository 
       |  +- AdminRepo.java
       |  +- ...
-
-​      +- service
+      
+      +- service
       |  +- AdminService.java
       |  +- ...
-      +- web
+ 
+      +- web     
       |  +- AdminController.java
-      |
+      |  +- ...
 
 ### Sketch
 
