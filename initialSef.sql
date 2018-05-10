@@ -12,6 +12,11 @@ File Encoding         : 65001
 
 Date: 2018-05-10 11:12:44
 */
+-- -----------------------------------------------------
+-- Schema sef
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `sef` ;
+USE `sef` ;
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -24,7 +29,7 @@ CREATE TABLE `admin` (
   `name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for coordinator
@@ -35,7 +40,7 @@ CREATE TABLE `coordinator` (
   `name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for course
@@ -46,7 +51,7 @@ CREATE TABLE `course` (
   `main_topic` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`code`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for courseoffering
@@ -62,7 +67,7 @@ CREATE TABLE `courseoffering` (
   KEY `FKd700n5sghcbcbys423re3b6k7` (`code`),
   KEY `FKfrc32xf4y6xvvg88e76coy269` (`user_id`),
   KEY `FKe1ce3q02f4udi229d9i8ph5kg` (`sch_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for course_prerequisites
@@ -73,7 +78,7 @@ CREATE TABLE `course_prerequisites` (
   `prerequisites_code` varchar(255) NOT NULL,
   KEY `FK1co8h3wleinvdtq51x3toq67a` (`prerequisites_code`),
   KEY `FK1nyrwerwqy7wrlhc1t6xtyrcw` (`course_code`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for enrolment
@@ -87,7 +92,7 @@ CREATE TABLE `enrolment` (
   PRIMARY KEY (`enrol_id`),
   KEY `FKkxfmcfsh5d9vf63er0epg2wh9` (`offering_id`),
   KEY `FKt00h72ar6f5gonac02apjgqwi` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for lecturer
@@ -98,7 +103,7 @@ CREATE TABLE `lecturer` (
   `name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for schedule
@@ -110,7 +115,7 @@ CREATE TABLE `schedule` (
   `week` int(11) DEFAULT NULL,
   `year` int(11) DEFAULT NULL,
   PRIMARY KEY (`sch_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for student
@@ -123,5 +128,5 @@ CREATE TABLE `student` (
   `max_electives` int(11) DEFAULT NULL,
   `max_load` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET FOREIGN_KEY_CHECKS=1;
