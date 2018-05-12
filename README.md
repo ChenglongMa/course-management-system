@@ -54,12 +54,14 @@ The project started at model classes mixed the **data** and the **logic** before
 
 There are still some problems in the project so that we need to keep refactoring it.
 
-1. Complete and fix the logic of the system ( i.e., add/remove/move/update the methods in each class of **service** package.)
-2. Finish the UI design.
-3. Fix the **Class diagram**, **interaction diagrams**, etc.
-4. Modify the **Unit Test** logic respectively.
-5. Build and test our project.
-6. Have fun!
+1. Create a **branch** for yourself(e.g., "Chenglong" for Chenglong Ma)
+2. Complete and fix the logic of the system ( i.e., add/remove/move/update the methods in each class of **service** package.)
+3. Finish the UI design.
+4. Fix the **Class diagram**, **interaction diagrams**, etc.
+5. Modify the **Unit Test** logic respectively.
+6. Build and test our project.
+7. Merge all branches to **master** if there is no bug through test.
+8. Have fun!
 
 ------------------------------------------------------------------
 
