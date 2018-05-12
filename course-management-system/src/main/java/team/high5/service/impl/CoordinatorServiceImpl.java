@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.high5.domain.entities.Course;
 import team.high5.domain.user.Student;
-import team.high5.repository.CourseRepo;
 import team.high5.repository.StudentRepo;
 import team.high5.service.CoordinatorService;
+import team.high5.service.CourseService;
 
 /**
  * course-management-system
@@ -19,22 +19,19 @@ import team.high5.service.CoordinatorService;
 @Service
 public class CoordinatorServiceImpl implements CoordinatorService {
 
-    private final CourseRepo courseRepo;
+    private final CourseService courseService;
     private final StudentRepo studentRepo;
 
 
     @Autowired
-    public CoordinatorServiceImpl(CourseRepo courseRepo, StudentRepo studentRepo) {
-        this.courseRepo = courseRepo;
+    public CoordinatorServiceImpl(CourseService courseService, StudentRepo studentRepo) {
+        this.courseService = courseService;
         this.studentRepo = studentRepo;
     }
 
     @Override
     public Course addCourse(Course course) {
-        if (courseRepo.existsById(course.getCode())) {
-            throw new IllegalArgumentException("The course has existed.");
-        }
-        return courseRepo.save(course);
+        return courseService.addCourse(course);
     }
 
     @Override
