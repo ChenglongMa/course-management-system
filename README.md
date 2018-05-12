@@ -27,7 +27,7 @@ The project has been greatly changed, including that:
         +- service
         |  +- AdminService.java
         |  +- ...
- 
+     
         +- web     
         |  +- AdminController.java
         |  +- ...
@@ -54,8 +54,13 @@ The project started at model classes mixed the **data** and the **logic** before
 
 There are still some problems in the project so that we need to keep refactoring it.
 
-1. Create a **branch** for yourself(e.g., "Chenglong" for Chenglong Ma)
-2. Complete and fix the logic of the system ( i.e., add/remove/move/update the methods in each class of **service** package.)
+1. Create a **branch** for yourself (e.g., "Chenglong" for Chenglong Ma)
+2. Complete and fix the logic of the system ( i.e., add/remove/move/update the methods in each class of **service** package.). For this part, what you need to do is,
+   1. Find your *Service.java class and *ServiceImpl.java class. (e.g., StudentService.java and StudentServiceImpl.java) which are **interface** and **implement** class pair.
+   2. Finish the logic in these class.
+   3. **Note1**: You can only call methods in the ***Repo**.java (e.g., StudentRepo.java) to access database.
+   4. **Note2**: For other logic methods, you can call the methods in the ***Service**.java(e.g., CourseService.java)
+   5. When you complete your methods and push them to your branch, you need to Create a **New pull request** to notify us to review them if there were any conflicts with ours.
 3. Finish the UI design.
 4. Fix the **Class diagram**, **interaction diagrams**, etc.
 5. Modify the **Unit Test** logic respectively.
