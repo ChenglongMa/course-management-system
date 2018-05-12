@@ -2,10 +2,8 @@ package team.high5.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team.high5.domain.entities.Course;
 import team.high5.domain.entities.CourseOffering;
 import team.high5.domain.entities.Enrolment;
-import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Student;
 import team.high5.repository.StudentRepo;
 import team.high5.service.CourseOfferingService;
@@ -41,6 +39,7 @@ public class StudentServiceImpl implements StudentService {
     public Student findOne(Student student) {
         return studentRepo.getOne(student.getUserId());
     }
+
     @Override
     public List<Enrolment> findEnrolments(Student student) {
         Student stu = findOne(student);
@@ -67,6 +66,7 @@ public class StudentServiceImpl implements StudentService {
         }
         return -1;
     }
+
     @Override
     public boolean enrol(Student student, CourseOffering offering) {
         boolean res = offering.getSchedule().equals(scheduleService.findCurrentSchedule());
@@ -78,10 +78,27 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void setMaxElectives(Student student, int maxElectives) {
+        student.setMaxElectives(maxElectives);
+        studentRepo.save(student);
+    }
+
+    @Override
+    public void setMaxLoad(Student student, int maxLoad) {
+        student.setMaxLoad(maxLoad);
+        studentRepo.save(student);
+    }
+
+    @Override
     public List<CourseOffering> viewCourseOffering(Student student) {
         List<CourseOffering> offerings = offeringService.findOfferingsInCurrentSemester();
         // TODO: 2018/5/9 0009 To be finished. filter those course offerings the student can enrol.
         return null;
+    }
+
+    @Override
+    public void save(Student student) {
+        studentRepo.save(student);
     }
 
 }

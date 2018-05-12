@@ -8,13 +8,12 @@ import team.high5.domain.entities.Enrolment;
 import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Lecturer;
 import team.high5.domain.user.Student;
-import team.high5.repository.StudentRepo;
 import team.high5.service.LecturerService;
 import team.high5.service.ScheduleService;
 import team.high5.service.StaffService;
+import team.high5.service.StudentService;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @Author : Charles Ma
@@ -25,26 +24,22 @@ import java.util.Optional;
 @Service
 public class LecturerServiceImpl implements LecturerService {
 
-    private final StudentRepo studentRepo;
+    private final StudentService studentService;
     private final ScheduleService scheduleService;
     private final StaffService staffService;
 
     @Autowired
-    public LecturerServiceImpl(StudentRepo studentRepo,
+    public LecturerServiceImpl(StudentService studentService,
                                ScheduleService scheduleService,
                                @Qualifier("staffServiceImpl") StaffService staffService) {
-        this.studentRepo = studentRepo;
+        this.studentService = studentService;
         this.scheduleService = scheduleService;
         this.staffService = staffService;
     }
 
     @Override
     public boolean uploadResult(Lecturer lecturer, Student student, String result) throws NullPointerException {
-        Optional<Student> op = studentRepo.findById(student.getUserId());
-        if (!op.isPresent()) {
-            throw new IllegalArgumentException("There is no such student.");
-        }
-        Student stu = op.get();
+        Student stu = studentService.findOne(student);
         List<Enrolment> enrolments = stu.getPerformance();
         Schedule currentSchedule = scheduleService.findCurrentSchedule();
         Enrolment enrolment = null;
@@ -59,7 +54,7 @@ public class LecturerServiceImpl implements LecturerService {
             throw new NullPointerException("There is no such student in the lecturer's course");
         }
         enrolment.setResult(result);
-        studentRepo.save(student);//TODO: To be verified.
+        studentService.save(student);
         return true;
     }
 

@@ -25,5 +25,11 @@ public interface StudentService {
 
     boolean enrol(Student student, CourseOffering offering);
 
+    void setMaxElectives(Student student, int maxElectives);
+
+    void setMaxLoad(Student student, int maxLoad);
+
     List<CourseOffering> viewCourseOffering(Student student);
+
+    void save(Student student);
 }

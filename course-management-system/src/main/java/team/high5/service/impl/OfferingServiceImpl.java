@@ -53,4 +53,20 @@ public class OfferingServiceImpl implements CourseOfferingService {
         Schedule current = scheduleService.findCurrentSchedule();
         return offeringRepo.findCourseOfferingsBySchedule(current);
     }
+
+    @Override
+    public CourseOffering addCourseOffering(CourseOffering offering) {
+        if (offering == null) {
+            throw new NullPointerException("CourseOffering is null");
+        }
+        if (offeringRepo.existsById(offering.getOfferingId())) {
+            throw new IllegalArgumentException("This offering has existed.");
+        }
+        return offeringRepo.save(offering);
+    }
+
+    @Override
+    public CourseOffering save(CourseOffering offering) {
+        return offeringRepo.save(offering);
+    }
 }

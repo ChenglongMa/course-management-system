@@ -25,6 +25,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course addCourse(Course course) {
+        if (course == null) {
+            throw new NullPointerException("Course is null");
+        }
         if (courseRepo.existsById(course.getCode())) {
             throw new IllegalArgumentException("The course has existed.");
         }

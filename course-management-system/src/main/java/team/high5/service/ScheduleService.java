@@ -15,4 +15,6 @@ public interface ScheduleService {
     Schedule findCurrentSchedule();
 
     void saveCurrentSchedule();
+
+    void advance();
 }

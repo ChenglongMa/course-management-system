@@ -10,9 +10,9 @@ import team.high5.domain.user.Admin;
 import team.high5.domain.user.Lecturer;
 import team.high5.domain.user.Student;
 import team.high5.repository.AdminRepo;
-import team.high5.repository.CourseOfferingRepo;
-import team.high5.repository.ScheduleRepo;
 import team.high5.service.AdminService;
+import team.high5.service.CourseOfferingService;
+import team.high5.service.ScheduleService;
 import team.high5.service.StaffService;
 
 import java.util.List;
@@ -26,18 +26,18 @@ import java.util.List;
 @Service
 public class AdminServiceImpl implements AdminService {
     private final AdminRepo adminRepo;
-    private final CourseOfferingRepo offeringRepo;
-    private final ScheduleRepo scheduleRepo;
+    private final CourseOfferingService offeringService;
+    private final ScheduleService scheduleService;
     private final StaffService staffService;
 
     @Autowired
     public AdminServiceImpl(AdminRepo adminRepo,
-                            CourseOfferingRepo offeringRepo,
-                            ScheduleRepo scheduleRepo,
+                            CourseOfferingService offeringService,
+                            ScheduleService scheduleService,
                             @Qualifier("staffServiceImpl") StaffService staffService) {
         this.adminRepo = adminRepo;
-        this.offeringRepo = offeringRepo;
-        this.scheduleRepo = scheduleRepo;
+        this.offeringService = offeringService;
+        this.scheduleService = scheduleService;
         this.staffService = staffService;
     }
 
@@ -53,20 +53,19 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public CourseOffering addCourseOffering(CourseOffering offering) {
-        return offeringRepo.save(offering);
+        return offeringService.addCourseOffering(offering);
     }
 
     @Override
     public CourseOffering assignLecturer(CourseOffering offering, Lecturer lecturer) {
         offering.setLecturer(lecturer);
-        return offeringRepo.save(offering);
+        return offeringService.save(offering);
     }
 
     @Override
     public void advanceSystem() {
         //TODO: To be checked.
-        Schedule.setCurrentSchedule(scheduleRepo.findScheduleBySchId(1));
-        scheduleRepo.save(Schedule.advance());
+        scheduleService.advance();
     }
 
     @Override

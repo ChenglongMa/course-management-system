@@ -80,6 +80,7 @@ public class Schedule extends Equals {
 
     /**
      * Advance the system to next week or next semester.
+     *
      * @return the current schedule
      */
     public static Schedule advance() {
@@ -112,7 +113,7 @@ public class Schedule extends Equals {
      */
     @Override
     public boolean equals(Object obj) {
-        if (!super.equals(obj)) {
+        if (this.getClass() != obj.getClass()) {
             return false;
         }
         Schedule other = (Schedule) obj;

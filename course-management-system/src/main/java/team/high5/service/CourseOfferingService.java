@@ -21,4 +21,8 @@ public interface CourseOfferingService {
     Schedule findSchedule(CourseOffering offering);
 
     List<CourseOffering> findOfferingsInCurrentSemester();
+
+    CourseOffering addCourseOffering(CourseOffering offering);
+
+    CourseOffering save(CourseOffering offering);
 }

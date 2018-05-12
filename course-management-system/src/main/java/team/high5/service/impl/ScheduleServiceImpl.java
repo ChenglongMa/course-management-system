@@ -31,9 +31,15 @@ public class ScheduleServiceImpl implements ScheduleService {
         return cSchedule;
     }
 
-    @Deprecated
     @Override
     public void saveCurrentSchedule() {
         scheduleRepo.save(Schedule.currentSchedule());
+    }
+
+    @Override
+    public void advance() {
+        findCurrentSchedule();
+        Schedule.advance();
+        saveCurrentSchedule();
     }
 }

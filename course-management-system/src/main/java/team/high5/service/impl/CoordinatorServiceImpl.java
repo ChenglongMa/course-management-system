@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.high5.domain.entities.Course;
 import team.high5.domain.user.Student;
-import team.high5.repository.StudentRepo;
 import team.high5.service.CoordinatorService;
 import team.high5.service.CourseService;
+import team.high5.service.StudentService;
 
 /**
  * course-management-system
@@ -20,13 +20,13 @@ import team.high5.service.CourseService;
 public class CoordinatorServiceImpl implements CoordinatorService {
 
     private final CourseService courseService;
-    private final StudentRepo studentRepo;
+    private final StudentService studentService;
 
 
     @Autowired
-    public CoordinatorServiceImpl(CourseService courseService, StudentRepo studentRepo) {
+    public CoordinatorServiceImpl(CourseService courseService, StudentService studentService) {
         this.courseService = courseService;
-        this.studentRepo = studentRepo;
+        this.studentService = studentService;
     }
 
     @Override
@@ -36,8 +36,7 @@ public class CoordinatorServiceImpl implements CoordinatorService {
 
     @Override
     public void grantPermission(Student student, int maxLoad) {
-        student.setMaxLoad(maxLoad);
-        studentRepo.save(student);
+        studentService.setMaxLoad(student,maxLoad);
     }
 
     @Override
