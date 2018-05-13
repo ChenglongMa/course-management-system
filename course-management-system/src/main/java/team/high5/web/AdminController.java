@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Admin;
 import team.high5.service.AdminService;
+import team.high5.service.EnrolmentService;
 
 import java.util.List;
 
@@ -22,10 +23,12 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService adminService;
+    private final EnrolmentService enrolmentService;
 
     @Autowired
-    public AdminController(AdminService adminService) {
+    public AdminController(AdminService adminService, EnrolmentService enrolmentService) {
         this.adminService = adminService;
+        this.enrolmentService = enrolmentService;
     }
 
     @GetMapping("/")
@@ -48,6 +51,10 @@ public class AdminController {
     @GetMapping("/advance")
     @ResponseBody
     public Schedule advanceSystem() {
+        if (enrolmentService.existRNF()) {
+            System.out.println("存在结果为RNF");
+            
+        }
         adminService.advanceSystem();
         return Schedule.currentSchedule();
     }
