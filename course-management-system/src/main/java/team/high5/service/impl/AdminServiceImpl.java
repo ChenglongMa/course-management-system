@@ -76,7 +76,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void advanceSystem() {
-        //TODO: To be checked.
         scheduleService.advance();
     }
 

@@ -3,11 +3,12 @@ package team.high5.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.high5.domain.entities.Enrolment;
+import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Student;
-import team.high5.repository.EnrolmentRepo;
-import team.high5.repository.StudentRepo;
 import team.high5.service.StaffService;
+import team.high5.service.StudentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,18 +19,23 @@ import java.util.List;
  */
 @Service
 public class StaffServiceImpl implements StaffService {
-    protected final StudentRepo studentRepo;
-    protected final EnrolmentRepo enrolmentRepo;
+    private final StudentService studentService;
 
     @Autowired
-    public StaffServiceImpl(StudentRepo studentRepo, EnrolmentRepo enrolmentRepo) {
-        this.studentRepo = studentRepo;
-        this.enrolmentRepo = enrolmentRepo;
+    public StaffServiceImpl(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @Override
     public List<Enrolment> viewPastPerformance(Student student) {
-        return studentRepo.findEnrolments(student);
+        List<Enrolment> enrolments = studentService.findEnrolments(student);
+        List<Enrolment> past = new ArrayList<>();
+        for (Enrolment enrolment : enrolments) {
+            if (enrolment.getOffering().getSchedule().compareTo(Schedule.currentSchedule()) < 0) {
+                past.add(enrolment);
+            }
+        }
+        return past;
     }
 
 }
