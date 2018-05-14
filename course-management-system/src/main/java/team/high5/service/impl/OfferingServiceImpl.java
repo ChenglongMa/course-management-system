@@ -51,7 +51,7 @@ public class OfferingServiceImpl implements CourseOfferingService {
     @Override
     public List<CourseOffering> findOfferingsInCurrentSemester() {
         Schedule current = scheduleService.findCurrentSchedule();
-        return offeringRepo.findCourseOfferingsBySchedule(current);
+        return offeringRepo.findCourseOfferingsByYearAndSemester(current.getYear(), current.getSemester());
     }
 
     @Override

@@ -11,7 +11,7 @@ import javax.persistence.*;
  * @Description :
  */
 @Entity
-@Table(name = "courseoffering")
+@Table(name = "courseOffering")
 public class CourseOffering {
     @Column(name = "OfferingId")
     @Id
@@ -25,9 +25,10 @@ public class CourseOffering {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "userId")
     private Lecturer lecturer;
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "schId")
-    private Schedule schedule;
+    @Column(name = "year")
+    private int year;
+    @Column(name = "semester")
+    private int semester;
     @Column(name = "capacity")
     private int capacity;
 
@@ -62,14 +63,7 @@ public class CourseOffering {
     }
 
     public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        if (schedule == null) {
-            throw new NullPointerException();
-        }
-        this.schedule = schedule;
+        return new Schedule(year, semester);
     }
 
     public int getCapacity() {
@@ -81,5 +75,21 @@ public class CourseOffering {
             throw new IllegalArgumentException("Capacity should greater than 0");
         }
         this.capacity = capacity;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
     }
 }

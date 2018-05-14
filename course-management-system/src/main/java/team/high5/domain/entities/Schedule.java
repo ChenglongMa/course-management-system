@@ -28,6 +28,14 @@ public class Schedule implements Comparable<Schedule> {
     @Column(name = "week")
     private int week;
 
+    public Schedule() {
+    }
+
+    public Schedule(int year, int semester) {
+        this.year = year;
+        this.semester = semester;
+    }
+
     /**
      * Returns the current schedule
      *

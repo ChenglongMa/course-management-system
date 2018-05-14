@@ -62,16 +62,6 @@ public class CourseOfferingTest {
         offering.setLecturer(null);
     }
 
-    @Test
-    public void getSchedule() {
-        offering.setSchedule(schedule);
-        assertEquals(schedule, offering.getSchedule());
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void setNullSchedule() {
-        offering.setSchedule(null);
-    }
 
     @Test
     public void getCapacity() {
