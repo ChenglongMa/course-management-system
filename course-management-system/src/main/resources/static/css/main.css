@@ -220,7 +220,18 @@ iframe {
   padding-bottom: 54px;
 }
 
-
+.styled-select {
+  /*background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;*/
+  /*height: 29px;*/
+  overflow: hidden;
+  /*width: 200px;*/
+  display: block;
+  width: 100%;
+  background: #e6e6e6;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 30px 0 68px;
+}
 /*---------------------------------------------*/
 .wrap-input100 {
   position: relative;
@@ -230,7 +241,7 @@ iframe {
 }
 
 .input100 {
-  font-family: Poppins-Medium;
+  font-family: Poppins-Medium, serif;
   font-size: 15px;
   line-height: 1.5;
   color: #666666;
