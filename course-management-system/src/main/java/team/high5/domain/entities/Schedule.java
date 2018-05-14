@@ -1,7 +1,5 @@
 package team.high5.domain.entities;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
-
 import javax.persistence.*;
 
 /**
@@ -12,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "schedule")
-public class Schedule extends Equals {
+public class Schedule implements Comparable<Schedule> {
     @Transient
     private static final int SEMESTER_COUNT = 2;
     @Transient
@@ -118,5 +116,17 @@ public class Schedule extends Equals {
         }
         Schedule other = (Schedule) obj;
         return this.getYear() == other.getYear() && this.getSemester() == other.getSemester();
+    }
+
+    @Override
+    public int compareTo(Schedule o) {
+        if (o==null) {
+            return 1;
+        }
+        if (this.year < o.year) {
+            return -1;
+        } else {
+            return this.semester - o.semester;
+        }
     }
 }

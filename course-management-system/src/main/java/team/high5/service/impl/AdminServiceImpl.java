@@ -53,11 +53,23 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public CourseOffering addCourseOffering(CourseOffering offering) {
+        if (offering == null) {
+            throw new NullPointerException("CourseOffering cannot be null");
+        }
+        if (offering.getSchedule().compareTo(Schedule.currentSchedule()) < 0) {
+            throw new IllegalArgumentException("Cannot add the past Course offering.");
+        }
         return offeringService.addCourseOffering(offering);
     }
 
     @Override
     public CourseOffering assignLecturer(CourseOffering offering, Lecturer lecturer) {
+        if (offering==null||lecturer==null) {
+            throw new NullPointerException("Offering and lecturer cannot be null");
+        }
+        if (!offering.getSchedule().equals(Schedule.currentSchedule())) {
+            throw new IllegalArgumentException("Cannot assign the lecturer to the offering in non-current semester");
+        }
         offering.setLecturer(lecturer);
         return offeringService.save(offering);
     }

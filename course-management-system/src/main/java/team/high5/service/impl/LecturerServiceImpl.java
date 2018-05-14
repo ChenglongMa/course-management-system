@@ -39,9 +39,12 @@ public class LecturerServiceImpl implements LecturerService {
 
     @Override
     public boolean uploadResult(Lecturer lecturer, Student student, String result) throws NullPointerException {
+        Schedule currentSchedule = scheduleService.findCurrentSchedule();
+        if (currentSchedule.getWeek() != 12) {
+            throw new IllegalArgumentException("Cannot upload result until the end of the semester.");
+        }
         Student stu = studentService.findOne(student);
         List<Enrolment> enrolments = stu.getPerformance();
-        Schedule currentSchedule = scheduleService.findCurrentSchedule();
         Enrolment enrolment = null;
         for (Enrolment e : enrolments) {
             CourseOffering offering = e.getOffering();
