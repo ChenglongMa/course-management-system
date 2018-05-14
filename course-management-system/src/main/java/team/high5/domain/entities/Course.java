@@ -22,7 +22,8 @@ public class Course {
     @ManyToMany(cascade = CascadeType.MERGE)
     private List<Course> prerequisites;
 
-    @OneToMany(mappedBy = "OfferingId")
+//    @OneToMany(mappedBy = "OfferingId")
+    @Transient
     private List<CourseOffering> courseOfferings;
 
     public String getCode() {

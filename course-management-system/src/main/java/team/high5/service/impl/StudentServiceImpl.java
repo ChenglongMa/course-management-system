@@ -2,6 +2,7 @@ package team.high5.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team.high5.domain.entities.Course;
 import team.high5.domain.entities.CourseOffering;
 import team.high5.domain.entities.Enrolment;
 import team.high5.domain.user.Student;
@@ -10,6 +11,7 @@ import team.high5.service.CourseOfferingService;
 import team.high5.service.ScheduleService;
 import team.high5.service.StudentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,9 +93,19 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<CourseOffering> viewCourseOffering(Student student) {
-        List<CourseOffering> offerings = offeringService.findOfferingsInCurrentSemester();
+        List<CourseOffering> res = new ArrayList<>();
+        List<CourseOffering> currOfferings = offeringService.findOfferingsInCurrentSemester();
         // TODO: 2018/5/9 0009 To be finished. filter those course offerings the student can enrol.
-        return null;
+        for (CourseOffering offering : currOfferings) {
+            for (Course course : offering.getCourse().getPrerequisites()) {
+                for (Enrolment enrolment : student.getPerformance()) {
+                    if (enrolment.getOffering().getCourse().getCode().equals(course.getCode())) {
+                        res.add(offering);
+                    }
+                }
+            }
+        }
+        return res;
     }
 
     @Override

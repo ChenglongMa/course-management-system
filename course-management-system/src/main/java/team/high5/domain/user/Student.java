@@ -19,7 +19,8 @@ public class Student extends User {
     private int maxLoad = 1;
     @Column(name = "maxElectives")
     private int maxElectives = 1;
-    @OneToMany(mappedBy = "enrolId", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "enrolId", cascade = CascadeType.ALL)
+    @Transient
     private List<Enrolment> performance;
 
     public int getMaxLoad() {

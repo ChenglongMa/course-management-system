@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "enrolment")
 public class Enrolment {
     @Id
-    @Column(name = "enrolId")
+//    @Column(name = "enrolId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int enrolId;
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
