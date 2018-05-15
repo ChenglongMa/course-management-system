@@ -1,7 +1,14 @@
 package team.high5.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import team.high5.domain.user.*;
+import team.high5.service.*;
 
 /**
  * @Author : Charles Ma
@@ -11,8 +18,57 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class MainController {
+    private final AdminService adminService;
+    private final CoordinatorService coordinatorService;
+    private final LecturerService lecturerService;
+    private final StudentService studentService;
+    private final UserService userService;
+
+    @Autowired
+    public MainController(AdminService adminService,
+                          CoordinatorService coordinatorService,
+                          LecturerService lecturerService,
+                          StudentService studentService,
+                          @Qualifier("userServiceImpl") UserService userService) {
+        this.adminService = adminService;
+        this.coordinatorService = coordinatorService;
+        this.lecturerService = lecturerService;
+        this.studentService = studentService;
+        this.userService = userService;
+    }
+
     @GetMapping("/")
     public String index() {
-        return "index2";
+        return "index";
+    }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public boolean login(@RequestParam(name = "userId") String userId,
+                         @RequestParam(name = "pwd") String pwd,
+                         @RequestParam(name = "role") String role) {
+        User user = null, findUser = null;
+        switch (role) {
+            case "s":
+                user = new Student(userId, pwd);
+                findUser = studentService.findOne((Student) user);
+                break;
+            case "a":
+                user = new Admin(userId, pwd);
+                findUser = adminService.findOne((Admin) user);
+                break;
+            case "c":
+                user = new Coordinator(userId, pwd);
+                findUser = coordinatorService.findOne((Coordinator) user);
+                break;
+            case "l":
+                user = new Lecturer(userId, pwd);
+                findUser = lecturerService.findOne((Lecturer) user);
+                break;
+        }
+        if (user == null || findUser == null) {
+            return false;
+        }
+        return user.equals(findUser);
     }
 }

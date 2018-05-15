@@ -10,6 +10,7 @@ import team.high5.repository.StudentRepo;
 import team.high5.service.CourseOfferingService;
 import team.high5.service.ScheduleService;
 import team.high5.service.StudentService;
+import team.high5.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
  * @Description :
  */
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl extends UserServiceImpl<Student> implements StudentService {
 
     private final StudentRepo studentRepo;
     private final ScheduleService scheduleService;
@@ -31,16 +32,19 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Autowired
-    public StudentServiceImpl(StudentRepo studentRepo, ScheduleService scheduleService, CourseOfferingService offeringService) {
+    public StudentServiceImpl(StudentRepo studentRepo,
+                              ScheduleService scheduleService,
+                              CourseOfferingService offeringService) {
+        super(studentRepo);
         this.studentRepo = studentRepo;
         this.scheduleService = scheduleService;
         this.offeringService = offeringService;
     }
 
-    @Override
-    public Student findOne(Student student) {
-        return studentRepo.getOne(student.getUserId());
-    }
+//    @Override
+//    public Student findOne(Student student) {
+//        return studentRepo.getOne(student.getUserId());
+//    }
 
     @Override
     public List<Enrolment> findEnrolments(Student student) {
@@ -106,11 +110,6 @@ public class StudentServiceImpl implements StudentService {
             }
         }
         return res;
-    }
-
-    @Override
-    public void save(Student student) {
-        studentRepo.save(student);
     }
 
 }

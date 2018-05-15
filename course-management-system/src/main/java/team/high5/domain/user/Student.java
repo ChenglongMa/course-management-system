@@ -2,7 +2,10 @@ package team.high5.domain.user;
 
 import team.high5.domain.entities.Enrolment;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.List;
 
 /**
@@ -19,9 +22,17 @@ public class Student extends User {
     private int maxLoad = 1;
     @Column(name = "maxElectives")
     private int maxElectives = 1;
-//    @OneToMany(mappedBy = "enrolId", cascade = CascadeType.ALL)
+    //    @OneToMany(mappedBy = "enrolId", cascade = CascadeType.ALL)
     @Transient
     private List<Enrolment> performance;
+
+    public Student(String userId, String pwd) {
+        super(userId, pwd);
+    }
+
+    public Student() {
+
+    }
 
     public int getMaxLoad() {
         return maxLoad;

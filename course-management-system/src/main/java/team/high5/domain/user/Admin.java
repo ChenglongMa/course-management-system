@@ -13,4 +13,11 @@ import javax.persistence.Table;
 @Table(name = "admin")
 public class Admin extends User {
 
+    public Admin(String userId, String pwd) {
+        super(userId,pwd);
+    }
+
+    public Admin() {
+
+    }
 }

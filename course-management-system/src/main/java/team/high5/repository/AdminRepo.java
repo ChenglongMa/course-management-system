@@ -1,6 +1,5 @@
 package team.high5.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import team.high5.domain.user.Admin;
 
 /**
@@ -9,5 +8,5 @@ import team.high5.domain.user.Admin;
  * @Time : 14:49
  * @Description : AdminRepo
  */
-public interface AdminRepo extends JpaRepository<Admin, String> {
+public interface AdminRepo extends UserRepo<Admin> {
 }

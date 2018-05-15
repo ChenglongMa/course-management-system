@@ -13,6 +13,7 @@ import java.util.List;
  * @Time : 15:48
  * @Description :
  */
-@Deprecated
+//@Deprecated
 public interface UserRepo<T extends User> extends JpaRepository<T, String> {
+
 }

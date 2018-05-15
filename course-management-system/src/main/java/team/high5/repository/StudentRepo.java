@@ -1,6 +1,5 @@
 package team.high5.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import team.high5.domain.entities.Enrolment;
@@ -16,7 +15,7 @@ import java.util.List;
  * @Time : 16:01
  * @Description :
  */
-public interface StudentRepo extends JpaRepository<Student, String> {
+public interface StudentRepo extends UserRepo<Student> {
     @Query("select e from Enrolment e where e.student=:stu")
     List<Enrolment> findEnrolments(@Param("stu") Student student);
 }

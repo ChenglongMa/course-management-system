@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import team.high5.domain.entities.Enrolment;
 import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Student;
+import team.high5.domain.user.User;
+import team.high5.repository.UserRepo;
 import team.high5.service.StaffService;
 import team.high5.service.StudentService;
 
@@ -18,11 +20,12 @@ import java.util.List;
  * @Description : StaffServiceImpl
  */
 @Service
-public class StaffServiceImpl implements StaffService {
+public class StaffServiceImpl<T extends User> extends UserServiceImpl<T> implements StaffService<T> {
     private final StudentService studentService;
 
     @Autowired
-    public StaffServiceImpl(StudentService studentService) {
+    public StaffServiceImpl(StudentService studentService, UserRepo<T> userRepo) {
+        super(userRepo);
         this.studentService = studentService;
     }
 

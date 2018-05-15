@@ -1,16 +1,15 @@
 package team.high5.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import team.high5.domain.entities.CourseOffering;
 import team.high5.domain.entities.Enrolment;
 import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Lecturer;
 import team.high5.domain.user.Student;
+import team.high5.repository.LecturerRepo;
 import team.high5.service.LecturerService;
 import team.high5.service.ScheduleService;
-import team.high5.service.StaffService;
 import team.high5.service.StudentService;
 
 import java.util.List;
@@ -22,19 +21,20 @@ import java.util.List;
  * @Description : LecturerServiceImpl
  */
 @Service
-public class LecturerServiceImpl implements LecturerService {
+public class LecturerServiceImpl extends StaffServiceImpl<Lecturer> implements LecturerService {
 
     private final StudentService studentService;
     private final ScheduleService scheduleService;
-    private final StaffService staffService;
+    private final LecturerRepo lecturerRepo;
 
     @Autowired
     public LecturerServiceImpl(StudentService studentService,
                                ScheduleService scheduleService,
-                               @Qualifier("staffServiceImpl") StaffService staffService) {
+                               LecturerRepo lecturerRepo) {
+        super(studentService, lecturerRepo);
         this.studentService = studentService;
         this.scheduleService = scheduleService;
-        this.staffService = staffService;
+        this.lecturerRepo = lecturerRepo;
     }
 
     @Override
@@ -61,8 +61,4 @@ public class LecturerServiceImpl implements LecturerService {
         return true;
     }
 
-    @Override
-    public List<Enrolment> viewPastPerformance(Student student) {
-        return staffService.viewPastPerformance(student);
-    }
 }

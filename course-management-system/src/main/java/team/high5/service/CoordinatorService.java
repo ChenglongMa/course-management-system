@@ -1,6 +1,7 @@
 package team.high5.service;
 
 import team.high5.domain.entities.Course;
+import team.high5.domain.user.Coordinator;
 import team.high5.domain.user.Student;
 
 /**
@@ -11,7 +12,7 @@ import team.high5.domain.user.Student;
  * @Time : 15:02
  * @Description :
  */
-public interface CoordinatorService {
+public interface CoordinatorService extends UserService<Coordinator>{
     Course addCourse(Course course);
 
     void grantPermission(Student student,int maxLoad);

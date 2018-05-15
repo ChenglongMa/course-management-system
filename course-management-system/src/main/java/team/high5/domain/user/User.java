@@ -30,6 +30,14 @@ public abstract class User {
     @Column(name = "password")
     private String password;
 
+    public User() {
+    }
+
+    public User(String userId, String password) {
+        this.userId = userId;
+        setPassword(password);
+    }
+
     /**
      * Encodes a string to MD5
      *
@@ -103,6 +111,6 @@ public abstract class User {
             return false;
         }
         User other = (User) obj;
-        return this.userId.equals(other.userId) && this.name.equals(other.name);
+        return this.userId.equals(other.userId) && this.password.equals(other.password);
     }
 }

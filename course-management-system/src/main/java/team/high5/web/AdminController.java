@@ -3,6 +3,7 @@ package team.high5.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.high5.domain.entities.Schedule;
@@ -41,11 +42,11 @@ public class AdminController {
 //    @PostMapping("/create")
     @ResponseBody
     public Admin postAdmin() {
-        Admin a = new Admin();
-        a.setUserId("e1001");
+        Admin a = new Admin("e10023","123");
+        a.setUserId("e10023");
         a.setName("Tom");
         a.setPassword("123");
-        return adminService.insert(a);
+        return adminService.save(a);
     }
 
     @GetMapping("/advance")

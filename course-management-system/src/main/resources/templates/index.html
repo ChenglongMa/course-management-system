@@ -1,101 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Login1</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" th:href="@{images/icons/favicon.ico}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/animate/animate.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/css-hamburgers/hamburgers.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/select2/select2.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}">
+    <!--===============================================================================================-->
 </head>
 <body>
-	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
-					<img src="images/img-01.png" alt="IMG">
-				</div>
 
-				<form class="login100-form validate-form">
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="/images/img-01.png" alt="IMG">
+            </div>
+
+            <form action="/login" class="login100-form validate-form" method="post">
 					<span class="login100-form-title">
 						Member Login
 					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
+                <!--data-validate="Valid email is required: ex@abc.xyz"-->
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="userId" placeholder="User ID">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
-					</div>
+                </div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input100" type="password" name="pwd" placeholder="Password">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
-					</div>
-					
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
-					</div>
+                </div>
+                <div>
+                    <!--<span class="focus-input100"></span>-->
+                    <!--<span class="symbol-input100">-->
+                    <!--<i class="fa fa-lock" aria-hidden="true"></i>-->
+                    <!--</span>-->
+                    <select name="role" class="styled-select" title="Choose Role">
+                        <option value="s">Student</option>
+                        <option value="a">Admin</option>
+                        <option value="c">Coordinator</option>
+                        <option value="l">Lecturer</option>
+                    </select>
 
-					<div class="text-center p-t-12">
-						<span class="txt1">
-							Forgot
-						</span>
-						<a class="txt2" href="#">
-							Username / Password?
-						</a>
-					</div>
+                </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        Login
+                    </button>
+                </div>
 
-					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
-							Create your Account
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	
+                <!--<div class="text-center p-t-12">-->
+                <!--<span class="txt1">-->
+                <!--Forget-->
+                <!--</span>-->
+                <!--<a class="txt2" href="#">-->
+                <!--Username / Password?-->
+                <!--</a>-->
+                <!--</div>-->
 
-	
-<!--===============================================================================================-->	
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="#">
+                        Create your Account
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script th:src="@{vendor/jquery/jquery-3.2.1.min.js}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+<script th:src="@{vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.min.js}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/tilt/tilt.jquery.min.js"></script>
-	<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
+<script th:src="@{vendor/select2/select2.min.js}"></script>
 <!--===============================================================================================-->
-	<script src="js/main.js"></script>
+<script th:src="@{vendor/tilt/tilt.jquery.min.js}"></script>
+<script>
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->
+<script th:src="@{js/main.js}"></script>
 
 </body>
 </html>

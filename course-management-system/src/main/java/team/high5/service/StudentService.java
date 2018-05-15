@@ -14,8 +14,7 @@ import java.util.List;
  * @Time : 15:04
  * @Description :
  */
-public interface StudentService {
-    Student findOne(Student student);
+public interface StudentService extends UserService<Student>{
 
     List<Enrolment> findEnrolments(Student student);
 
@@ -31,5 +30,4 @@ public interface StudentService {
 
     List<CourseOffering> viewCourseOffering(Student student);
 
-    void save(Student student);
 }

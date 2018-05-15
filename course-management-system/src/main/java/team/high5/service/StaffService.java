@@ -2,6 +2,7 @@ package team.high5.service;
 
 import team.high5.domain.entities.Enrolment;
 import team.high5.domain.user.Student;
+import team.high5.domain.user.User;
 
 import java.util.List;
 
@@ -11,6 +12,6 @@ import java.util.List;
  * @Time : 14:50
  * @Description : StaffService
  */
-public interface StaffService {
+public interface StaffService<T extends User> extends UserService<T>{
     List<Enrolment> viewPastPerformance(Student student);
 }

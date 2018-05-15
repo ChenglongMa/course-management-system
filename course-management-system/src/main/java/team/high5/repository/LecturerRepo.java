@@ -11,6 +11,6 @@ import team.high5.domain.user.Lecturer;
  * @Time : 16:00
  * @Description :
  */
-public interface LecturerRepo extends JpaRepository<Lecturer, String> {
+public interface LecturerRepo extends UserRepo<Lecturer> {
 
 }

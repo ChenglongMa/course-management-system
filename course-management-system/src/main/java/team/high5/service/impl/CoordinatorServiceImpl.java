@@ -3,7 +3,9 @@ package team.high5.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.high5.domain.entities.Course;
+import team.high5.domain.user.Coordinator;
 import team.high5.domain.user.Student;
+import team.high5.repository.CoordinatorRepo;
 import team.high5.service.CoordinatorService;
 import team.high5.service.CourseService;
 import team.high5.service.StudentService;
@@ -17,16 +19,19 @@ import team.high5.service.StudentService;
  * @Description :
  */
 @Service
-public class CoordinatorServiceImpl implements CoordinatorService {
+public class CoordinatorServiceImpl extends UserServiceImpl<Coordinator> implements CoordinatorService {
 
     private final CourseService courseService;
     private final StudentService studentService;
+    private final CoordinatorRepo coordinatorRepo;
 
 
     @Autowired
-    public CoordinatorServiceImpl(CourseService courseService, StudentService studentService) {
+    public CoordinatorServiceImpl(CourseService courseService, StudentService studentService, CoordinatorRepo coordinatorRepo) {
+        super(coordinatorRepo);
         this.courseService = courseService;
         this.studentService = studentService;
+        this.coordinatorRepo = coordinatorRepo;
     }
 
     @Override
@@ -36,7 +41,7 @@ public class CoordinatorServiceImpl implements CoordinatorService {
 
     @Override
     public void grantPermission(Student student, int maxLoad) {
-        studentService.setMaxLoad(student,maxLoad);
+        studentService.setMaxLoad(student, maxLoad);
     }
 
     @Override
