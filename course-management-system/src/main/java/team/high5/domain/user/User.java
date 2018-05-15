@@ -106,6 +106,9 @@ public abstract class User {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
         boolean res = this.getClass() == obj.getClass();
         if (!res) {
             return false;

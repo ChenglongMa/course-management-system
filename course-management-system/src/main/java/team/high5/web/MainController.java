@@ -22,19 +22,16 @@ public class MainController {
     private final CoordinatorService coordinatorService;
     private final LecturerService lecturerService;
     private final StudentService studentService;
-    private final UserService userService;
 
     @Autowired
     public MainController(AdminService adminService,
                           CoordinatorService coordinatorService,
                           LecturerService lecturerService,
-                          StudentService studentService,
-                          @Qualifier("userServiceImpl") UserService userService) {
+                          StudentService studentService) {
         this.adminService = adminService;
         this.coordinatorService = coordinatorService;
         this.lecturerService = lecturerService;
         this.studentService = studentService;
-        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -43,32 +40,69 @@ public class MainController {
     }
 
     @PostMapping("/login")
-    @ResponseBody
-    public boolean login(@RequestParam(name = "userId") String userId,
+//    @ResponseBody
+    public String login(@RequestParam(name = "userId") String userId,
                          @RequestParam(name = "pwd") String pwd,
                          @RequestParam(name = "role") String role) {
-        User user = null, findUser = null;
-        switch (role) {
-            case "s":
-                user = new Student(userId, pwd);
-                findUser = studentService.findOne((Student) user);
-                break;
-            case "a":
-                user = new Admin(userId, pwd);
-                findUser = adminService.findOne((Admin) user);
-                break;
-            case "c":
-                user = new Coordinator(userId, pwd);
-                findUser = coordinatorService.findOne((Coordinator) user);
-                break;
-            case "l":
-                user = new Lecturer(userId, pwd);
-                findUser = lecturerService.findOne((Lecturer) user);
-                break;
+        try {
+            User user = null, findUser = null;
+            switch (role) {
+                case "s":
+                    user = new Student(userId, pwd);
+                    findUser = studentService.findOne((Student) user);
+                    break;
+                case "a":
+                    user = new Admin(userId, pwd);
+                    findUser = adminService.findOne((Admin) user);
+                    break;
+                case "c":
+                    user = new Coordinator(userId, pwd);
+                    findUser = coordinatorService.findOne((Coordinator) user);
+                    break;
+                case "l":
+                    user = new Lecturer(userId, pwd);
+                    findUser = lecturerService.findOne((Lecturer) user);
+                    break;
+            }
+            if (user == null || !user.equals(findUser)) {
+                return "redirect:/";
+            }
+            return "redirect:/" + role;
+        } catch (Exception e) {
+            return "redirect:/";
         }
-        if (user == null || findUser == null) {
+    }
+    @PostMapping("/signUp")
+    @ResponseBody
+    public boolean signUp(@RequestParam(name = "userId") String userId,
+                          @RequestParam(name = "pwd") String pwd,
+                          @RequestParam(name = "role") String role) {
+        try {
+            User user = null, findUser = null;
+            switch (role) {
+                case "s":
+                    user = new Student(userId, pwd);
+                    findUser = studentService.insert((Student) user);
+                    break;
+                case "a":
+                    user = new Admin(userId, pwd);
+                    findUser = adminService.insert((Admin) user);
+                    break;
+                case "c":
+                    user = new Coordinator(userId, pwd);
+                    findUser = coordinatorService.insert((Coordinator) user);
+                    break;
+                case "l":
+                    user = new Lecturer(userId, pwd);
+                    findUser = lecturerService.insert((Lecturer) user);
+                    break;
+            }
+            if (user == null || findUser == null) {
+                return false;
+            }
+            return user.equals(findUser);
+        } catch (Exception e) {
             return false;
         }
-        return user.equals(findUser);
     }
 }

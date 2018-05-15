@@ -6,6 +6,7 @@ import team.high5.domain.user.User;
 import team.high5.repository.UserRepo;
 import team.high5.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -29,6 +30,11 @@ public class UserServiceImpl<T extends User> implements UserService<T> {
     public T findOne(T user) {
         Optional<T> op = userRepo.findById(user.getUserId());
         return op.orElse(null);
+    }
+
+    @Override
+    public List<T> findAll() {
+        return userRepo.findAll();
     }
 
     @Override

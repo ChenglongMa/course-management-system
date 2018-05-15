@@ -20,7 +20,7 @@ import java.util.List;
  * @Description : AdminController
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/a")
 public class AdminController {
 
     private final AdminService adminService;
@@ -32,10 +32,10 @@ public class AdminController {
         this.enrolmentService = enrolmentService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     @ResponseBody
     public List<Admin> getAdmins() {
-        return adminService.get();
+        return adminService.findAll();
     }
 
     @GetMapping("/create")

@@ -35,16 +35,6 @@ public class AdminServiceImpl extends StaffServiceImpl<Admin> implements AdminSe
     }
 
     @Override
-    public List<Admin> get() {
-        return adminRepo.findAll();
-    }
-
-    @Override
-    public Admin save(Admin admin) {
-        return adminRepo.save(admin);
-    }
-
-    @Override
     public CourseOffering addCourseOffering(CourseOffering offering) {
         if (offering == null) {
             throw new NullPointerException("CourseOffering cannot be null");

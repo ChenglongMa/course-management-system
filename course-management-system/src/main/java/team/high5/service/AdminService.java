@@ -14,10 +14,6 @@ import java.util.List;
  */
 public interface AdminService extends StaffService<Admin> {
 
-    List<Admin> get();
-
-    Admin save(Admin admin);
-
     CourseOffering addCourseOffering(CourseOffering offering);
 
     CourseOffering assignLecturer(CourseOffering offering,Lecturer lecturer);

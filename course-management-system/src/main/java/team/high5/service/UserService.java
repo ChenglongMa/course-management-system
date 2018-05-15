@@ -2,6 +2,8 @@ package team.high5.service;
 
 import team.high5.domain.user.User;
 
+import java.util.List;
+
 /**
  * course-management-system
  *
@@ -13,6 +15,8 @@ import team.high5.domain.user.User;
 public interface UserService<T extends User> {
 
     T findOne(T user);
+
+    List<T> findAll();
 
     T insert(T user);
 
