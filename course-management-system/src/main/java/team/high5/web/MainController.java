@@ -1,14 +1,19 @@
 package team.high5.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.high5.domain.user.*;
-import team.high5.service.*;
+import team.high5.service.AdminService;
+import team.high5.service.CoordinatorService;
+import team.high5.service.LecturerService;
+import team.high5.service.StudentService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author : Charles Ma
@@ -40,38 +45,45 @@ public class MainController {
     }
 
     @PostMapping("/login")
-//    @ResponseBody
-    public String login(@RequestParam(name = "userId") String userId,
-                         @RequestParam(name = "pwd") String pwd,
-                         @RequestParam(name = "role") String role) {
+    @ResponseBody
+    public Map login(@RequestParam(name = "userId") String userId,
+                     @RequestParam(name = "pwd") String pwd,
+                     @RequestParam(name = "role") String role) {
         try {
+            Map<String, String> map = new HashMap<>();
             User user = null, findUser = null;
             switch (role) {
-                case "s":
+                case "student":
                     user = new Student(userId, pwd);
                     findUser = studentService.findOne((Student) user);
                     break;
-                case "a":
+                case "admin":
                     user = new Admin(userId, pwd);
                     findUser = adminService.findOne((Admin) user);
                     break;
-                case "c":
+                case "coordinator":
                     user = new Coordinator(userId, pwd);
                     findUser = coordinatorService.findOne((Coordinator) user);
                     break;
-                case "l":
+                case "lecturer":
                     user = new Lecturer(userId, pwd);
                     findUser = lecturerService.findOne((Lecturer) user);
                     break;
             }
             if (user == null || !user.equals(findUser)) {
-                return "redirect:/";
+                map.put("error", "登录失败");
+                return map;
             }
-            return "redirect:/" + role;
+            map.put("role", role);
+
+            return map;
+//            return "redirect:/" + role;
         } catch (Exception e) {
-            return "redirect:/";
+//            return "redirect:/";
+            return null;
         }
     }
+
     @PostMapping("/signUp")
     @ResponseBody
     public boolean signUp(@RequestParam(name = "userId") String userId,

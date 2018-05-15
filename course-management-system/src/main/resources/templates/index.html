@@ -30,13 +30,13 @@
                 <img src="/images/img-01.png" alt="IMG">
             </div>
 
-            <form name="f1" action="" class="login100-form validate-form" method="post">
+            <form name="f1" action="" class="login100-form validate-form">
 					<span class="login100-form-title">
 						Member Login
 					</span>
                 <!--data-validate="Valid email is required: ex@abc.xyz"-->
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" name="userId" placeholder="User ID">
+                    <input id="userId" class="input100" type="text" name="userId" placeholder="User ID">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input class="input100" type="password" name="pwd" placeholder="Password">
+                    <input id="pwd" class="input100" type="password" name="pwd" placeholder="Password">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -55,21 +55,22 @@
                     <!--<span class="symbol-input100">-->
                     <!--<i class="fa fa-lock" aria-hidden="true"></i>-->
                     <!--</span>-->
-                    <select name="role" class="styled-select" title="Choose Role">
-                        <option value="s">Student</option>
-                        <option value="a">Admin</option>
-                        <option value="c">Coordinator</option>
-                        <option value="l">Lecturer</option>
+                    <select id="role" name="role" class="styled-select" title="Choose Role">
+                        <option value="student">Student</option>
+                        <option value="admin">Admin</option>
+                        <option value="coordinator">Coordinator</option>
+                        <option value="lecturer">Lecturer</option>
                     </select>
 
                 </div>
                 <div class="container-login100-form-btn">
-                    <button name="signIn" class="login100-form-btn" onclick="f1.action='/login';f1.submit()">
+                    <!--<button name="signIn" class="login100-form-btn" onclick="f1.action='/login';f1.submit()">-->
+                    <button name="signIn" class="login100-form-btn" onclick="onLogin()">
                         Sign in
                     </button>
                     <br>
                     <button id="#btn" name="signUp" class="login100-form-btn" onclick="onSignUp()">
-                    Sign up
+                        Sign up
                     </button>
                 </div>
                 <div class="text-center p-t-136">
@@ -104,17 +105,36 @@
 <script th:src="@{js/main.js}"></script>
 <script language="JavaScript">
     function onSignUp() {
-        document.f1.action='/signUp';
+        document.f1.action = '/signUp';
         document.f1.submit();
-        
         $.ajax({
             url: "/signUp",
             type: "post",
             dataType: "boolean",
-            success:function (json) {
+            success: function (json) {
                 alert("成功");
             }
         })
+    }
+
+    function onLogin() {
+        var userId = document.getElementById("userId").value;
+        var pwd = document.getElementById("pwd").value;
+        var role = document.getElementById("role").value;
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: {"userId": userId, "pwd": pwd, "role": role},
+            success: function (data) {
+                var info = data.info;
+                if (info === "登录失败") {
+                    alert("登录失败");
+                } else {
+                    alert("asdfad");
+                    location.href = "/" + data.role;
+                }
+            }
+        });
     }
 </script>
 </body>
