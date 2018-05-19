@@ -25,4 +25,8 @@ public interface CourseOfferingService {
     CourseOffering addCourseOffering(CourseOffering offering);
 
     CourseOffering save(CourseOffering offering);
+
+    void deleteOffering(CourseOffering offering);
+
+    boolean deleteIfExist(CourseOffering offering);
 }

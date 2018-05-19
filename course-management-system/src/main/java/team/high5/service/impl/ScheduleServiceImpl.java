@@ -6,6 +6,8 @@ import team.high5.domain.entities.Schedule;
 import team.high5.repository.ScheduleRepo;
 import team.high5.service.ScheduleService;
 
+import java.util.Calendar;
+
 /**
  * course-management-system
  *
@@ -27,8 +29,16 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public Schedule findCurrentSchedule() {
         Schedule cSchedule = scheduleRepo.findScheduleBySchId(1);
+        if (cSchedule == null) {
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            cSchedule = new Schedule(year, 1);
+            cSchedule.setSchId(1);
+            cSchedule.setWeek(1);
+            cSchedule = scheduleRepo.save(cSchedule);
+        }
         Schedule.setCurrentSchedule(cSchedule);
-        return cSchedule;
+        return Schedule.currentSchedule();
     }
 
     @Override

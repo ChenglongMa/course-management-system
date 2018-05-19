@@ -69,4 +69,18 @@ public class OfferingServiceImpl implements CourseOfferingService {
     public CourseOffering save(CourseOffering offering) {
         return offeringRepo.save(offering);
     }
+
+    @Override
+    public void deleteOffering(CourseOffering offering) {
+        offeringRepo.delete(offering);
+    }
+
+    @Override
+    public boolean deleteIfExist(CourseOffering offering) {
+        if (offeringRepo.existsById(offering.getOfferingId())) {
+            offeringRepo.delete(offering);
+            return true;
+        }
+        return false;
+    }
 }

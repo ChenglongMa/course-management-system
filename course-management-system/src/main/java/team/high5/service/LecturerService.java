@@ -11,4 +11,6 @@ import team.high5.domain.user.Student;
  */
 public interface LecturerService extends StaffService<Lecturer> {
     boolean uploadResult(Lecturer lecturer, Student student, String result);
+
+    Lecturer addLecturer(Lecturer lecturer);
 }

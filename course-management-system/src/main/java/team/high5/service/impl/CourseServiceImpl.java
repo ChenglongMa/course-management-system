@@ -6,6 +6,8 @@ import team.high5.domain.entities.Course;
 import team.high5.repository.CourseRepo;
 import team.high5.service.CourseService;
 
+import java.util.List;
+
 /**
  * course-management-system
  *
@@ -32,5 +34,34 @@ public class CourseServiceImpl implements CourseService {
             throw new IllegalArgumentException("The course has existed.");
         }
         return courseRepo.save(course);
+    }
+
+    @Override
+    public Course findCourseByCode(String code) {
+        return courseRepo.findById(code).orElse(null);
+    }
+
+    @Override
+    public List<Course> findAll() {
+        return courseRepo.findAll();
+    }
+
+    @Override
+    public Course saveCourse(Course course) {
+        return courseRepo.save(course);
+    }
+
+    @Override
+    public void deleteCourse(Course course) {
+        courseRepo.delete(course);
+    }
+
+    @Override
+    public boolean deleteIfExist(Course course) {
+        if (courseRepo.existsById(course.getCode())) {
+            courseRepo.delete(course);
+            return true;
+        }
+        return false;
     }
 }

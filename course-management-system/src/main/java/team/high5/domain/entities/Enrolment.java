@@ -17,10 +17,10 @@ public class Enrolment {
 //    @Column(name = "enrolId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int enrolId;
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "userId")
     private Student student;
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "OfferingId")
     private CourseOffering offering;
     @Column(name = "result")

@@ -12,9 +12,9 @@ import javax.persistence.*;
 @Table(name = "schedule")
 public class Schedule implements Comparable<Schedule> {
     @Transient
-    private static final int SEMESTER_COUNT = 2;
+    public static final int SEMESTER_COUNT = 2;
     @Transient
-    private static final int WEEK_COUNT = 12;
+    public static final int WEEK_COUNT = 12;
     @Transient
     private static Schedule currentSchedule = null;
     @Id
