@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>Admin</title>
@@ -7,9 +7,9 @@
     <meta name="description" content="Admin panel developed with the Bootstrap from Twitter.">
     <meta name="author" content="travis">
 
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/site.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link th:href="@{css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{css/site.css}" rel="stylesheet">
+    <link th:href="@{css/bootstrap-responsive.css}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">Strass Administration</a>
+            <a class="brand" href="#">Course Management System</a>
             <div class="btn-group pull-right">
                 <a class="btn" href="my-profile.html"><i class="icon-user"></i> Admin</a>
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -32,12 +32,12 @@
                 <ul class="dropdown-menu">
                     <li><a href="my-profile.html">Profile</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="/">Logout</a></li>
                 </ul>
             </div>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b
                             class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -63,32 +63,40 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3">
+        <div class="span3" hidden="hidden">
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <li class="nav-header"><i class="icon-wrench"></i> Administration</li>
-                    <li class="active"><a href="users.html">Users</a></li>
-                    <li><a href="roles.html">Roles</a></li>
-                    <li class="nav-header"><i class="icon-signal"></i> Statistics</li>
-                    <li><a href="stats.html">General</a></li>
-                    <li><a href="user-stats.html">Users</a></li>
-                    <li><a href="visitor-stats.html">Visitors</a></li>
+                    <!--修改菜单-->
+                    <li class="active"><a href="users.html">Course Offerings</a></li>
+                    <li><a href="roles.html">Advance System</a></li>
+                    <!--暂时省略-->
+                    <!--<li class="nav-header"><i class="icon-signal"></i> Statistics</li>-->
+                    <!--<li><a href="stats.html">General</a></li>-->
+                    <!--<li><a href="user-stats.html">Users</a></li>-->
+                    <!--<li><a href="visitor-stats.html">Visitors</a></li>-->
                     <li class="nav-header"><i class="icon-user"></i> Profile</li>
                     <li><a href="my-profile.html">My profile</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="/">Logout</a></li>
                 </ul>
             </div>
         </div>
         <div class="span9">
             <div class="well hero-unit">
                 <h1>Welcome, Admin</h1>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam eget ligula eu lectus lobortis
-                    condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus
-                    et malesuada fames ac turpis egestas. </p>
-                <p><a class="btn btn-success btn-large" href="users.html">Manage Users &raquo;</a></p>
+                <p></p>
+                <p>Hello and welcome to Course Management System (CMS). </p>
+                <p>This is a admin management page for the admin in our university to
+                    manage the course offerings which is based on the courses coordinators
+                    managed. </p>
+                <p>For the admin, you can assign a lecturer to the course offering.</p>
+                <p>In a addition, you can advance our system to next phase.</p>
+                <p><b>NOTE:</b> you might need confirm the outstanding result (i.e., "RNF") when
+                    you advance the system.
+                </p>
+                <p><a class="btn btn-success btn-large" href="users.html">Manage Course Offerings &raquo;</a></p>
             </div>
-            <div class="row-fluid">
+            <div class="row-fluid" hidden>
                 <div class="span3">
                     <h3>Total Users</h3>
                     <p><a href="users.html" class="badge badge-inverse">563</a></p>
@@ -107,7 +115,7 @@
                 </div>
             </div>
             <br/>
-            <div class="row-fluid">
+            <div class="row-fluid" hidden="hidden">
                 <div class="page-header">
                     <h1>Pending Users
                         <small>Approve or Reject</small>
@@ -160,13 +168,12 @@
     <hr>
 
     <footer class="well">
-        &copy; Strass - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -
-        Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+        &copy; Chenglong Ma - Team High Five @SEF
     </footer>
 
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script th:src="@{js/jquery.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
 </body>
 </html>

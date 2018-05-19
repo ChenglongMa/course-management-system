@@ -3,15 +3,12 @@ package team.high5.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Admin;
 import team.high5.service.AdminService;
 import team.high5.service.EnrolmentService;
-
-import java.util.List;
 
 /**
  * @Author : Charles Ma
@@ -20,7 +17,7 @@ import java.util.List;
  * @Description : AdminController
  */
 @Controller
-@RequestMapping("/a")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final AdminService adminService;
@@ -33,9 +30,8 @@ public class AdminController {
     }
 
     @GetMapping
-    @ResponseBody
-    public List<Admin> getAdmins() {
-        return adminService.findAll();
+    public String getAdmins() {
+        return "admin";
     }
 
     @GetMapping("/create")

@@ -30,8 +30,8 @@
                 <img src="/images/img-01.png" alt="IMG">
             </div>
 
-            <form name="f1" action="" class="login100-form validate-form">
-					<span class="login100-form-title">
+            <form name="f1" class="login100-form validate-form">
+					<span class="login100-form-title" th:method="post">
 						Member Login
 					</span>
                 <!--data-validate="Valid email is required: ex@abc.xyz"-->
@@ -130,7 +130,6 @@
                 if (info === "登录失败") {
                     alert("登录失败");
                 } else {
-                    alert("asdfad");
                     location.href = "/" + data.role;
                 }
             }
