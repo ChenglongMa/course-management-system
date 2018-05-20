@@ -128,13 +128,11 @@ public class Schedule implements Comparable<Schedule> {
 
     @Override
     public int compareTo(Schedule o) {
-        if (o==null) {
+        if (o == null) {
             return 1;
         }
-        if (this.year < o.year) {
-            return -1;
-        } else {
+        if (this.year == o.year) {
             return this.semester - o.semester;
-        }
+        } else return this.year - o.year;
     }
 }

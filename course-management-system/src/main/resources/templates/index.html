@@ -30,8 +30,8 @@
                 <img src="/images/img-01.png" alt="IMG">
             </div>
 
-            <form name="f1" class="login100-form validate-form">
-					<span class="login100-form-title" th:method="post">
+            <form action="" name="f1" class="login100-form validate-form" th:method="post">
+					<span class="login100-form-title">
 						Member Login
 					</span>
                 <!--data-validate="Valid email is required: ex@abc.xyz"-->
@@ -65,11 +65,11 @@
                 </div>
                 <div class="container-login100-form-btn">
                     <!--<button name="signIn" class="login100-form-btn" onclick="f1.action='/login';f1.submit()">-->
-                    <button name="signIn" class="login100-form-btn" onclick="onLogin()">
+                    <button name="signIn" class="login100-form-btn" onclick="f1.action='/login'">
                         Sign in
                     </button>
                     <br>
-                    <button id="#btn" name="signUp" class="login100-form-btn" onclick="onSignUp()">
+                    <button name="signUp" class="login100-form-btn" onclick="f1.action='/signUp'">
                         Sign up
                     </button>
                 </div>

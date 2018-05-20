@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Admin | Course Offerings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin panel developed with the Bootstrap from Twitter.">
+    <meta name="author" content="travis">
+
+    <link th:href="@{css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{css/site.css}" rel="stylesheet">
+    <link th:href="@{css/bootstrap-responsive.css}" rel="stylesheet">
+    <style type="text/css">
+        .pastOffering {
+            background-color: #bfc7cf;
+        }
+
+        .futureOffering {
+            background-color: #5e894f;
+            color: white;
+        }
+
+        .italic {
+            font-style: italic
+        }
+
+        .madelContent {
+            margin: 20px;
+            padding-top: 5px
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">Course Management System</a>
+            <div class="btn-group pull-right">
+                <a class="btn" href="my-profile.html"><i class="icon-user"></i> Admin</a>
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="my-profile.html">Profile</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/">Logout</a></li>
+                </ul>
+            </div>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li><a href="/">Home</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b
+                            class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="new-user.html">New User</a></li>
+                            <li class="divider"></li>
+                            <li><a href="users.html">Manage Users</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Roles <b
+                            class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="new-role.html">New Role</a></li>
+                            <li class="divider"></li>
+                            <li><a href="roles.html">Manage Roles</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="stats.html">Stats</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3" hidden="hidden">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header"><i class="icon-wrench"></i> Administration</li>
+                    <!--修改菜单-->
+                    <li class="active"><a href="/offering">Course Offerings</a></li>
+                    <li><a href="roles.html">Advance System</a></li>
+                    <!--暂时省略-->
+                    <!--<li class="nav-header"><i class="icon-signal"></i> Statistics</li>-->
+                    <!--<li><a href="stats.html">General</a></li>-->
+                    <!--<li><a href="user-stats.html">Users</a></li>-->
+                    <!--<li><a href="visitor-stats.html">Visitors</a></li>-->
+                    <li class="nav-header"><i class="icon-user"></i> Profile</li>
+                    <li><a href="my-profile.html">My profile</a></li>
+                    <li><a href="/">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--替换部分-->
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="page-header">
+                    <h1>Course Offerings
+                        <small>Management</small>
+                    </h1>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Year</th>
+                        <th>Semester</th>
+                        <th>Capacity</th>
+                        <th>Lecturer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:class="${offer.getSchedule().compareTo(currSch)<0?'pastOffering':(offer.getSchedule().compareTo(currSch)>0?'futureOffering':'')+' pending-user'}"
+                        th:each="offer,stat:${offers}">
+                        <td th:text="${offer.course.code}"></td>
+                        <td th:text="${offer.course.name}"></td>
+                        <td th:text="${offer.year}"></td>
+                        <td th:text="${offer.semester}"></td>
+                        <td th:text="${offer.capacity}"></td>
+                        <td th:class="${offer.lecturer==null?'italic':''}"
+                            th:text="${offer.lecturer==null?'TBA':offer.lecturer.name}"></td>
+                        <!--<td><span class="label label-important">Inactive</span></td>-->
+                        <!--<td><span class="user-actions"><a href="javascript:void(0);"-->
+                        <!--class="label label-success">Approve</a> <a-->
+                        <!--href="javascript:void(0);" class="label label-important">Reject</a></span></td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="float: left;justify-content: space-between">
+                <button class="btn btn-success" data-toggle="modal" data-target="#newOffering">Add Course Offering
+                </button>
+                <button class="btn">Assign Lecturer</button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <footer class="well">
+        &copy; Chenglong Ma 2018- Team High Five @SEF
+    </footer>
+
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="newOffering" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Add new Course Offerings
+                </h4>
+            </div>
+            <!--<div class="modal-body">-->
+            <form th:action="@{/offering/{action}(action=${action})}" method="post" class="modal-body form-horizontal">
+                <input type="hidden" name="id" th:value="${offering.offeringId}"/>
+                <div class="madelContent form-group">
+                    <label for="offering_code" class="col-sm-2 control-label">Code: </label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" id="offering_code" name="code"
+                               th:value="${offering.course==null?'':offering.course.code}"
+                               th:field="*{offering.course.code}"/>
+                    </div>
+                </div>
+
+                <div class="madelContent form-group">
+                    <label for="offering_year" class="col-sm-2 control-label">Year: </label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" id="offering_year" name="year"
+                               th:value="${offering.year}"
+                               th:field="*{offering.year}"/>
+                    </div>
+                </div>
+
+                <div class="madelContent form-group">
+                    <label for="offering_semester" class="col-sm-2 control-label">Semester: </label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" id="offering_semester" name="semester"
+                               th:value="${offering.semester}"
+                               th:field="*{offering.semester}"/>
+                    </div>
+                </div>
+
+                <div class="madelContent form-group">
+                    <label for="offering_capacity" class="col-sm-2 control-label">Capacity: </label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" id="offering_capacity" name="capacity"
+                               th:value="${offering.capacity}"
+                               th:field="*{offering.capacity}"/>
+                    </div>
+                </div>
+
+                <div class="madelContent form-group">
+                    <label for="offering_lecturer" class="col-sm-2 control-label">Lecturer Code: </label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" id="offering_lecturer" name="lecturer"
+                               th:value="${offering.lecturer==null?'':offering.lecturer.userId}"
+                               th:field="*{offering.lecturer.userId}"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Apply</button>
+                </div>
+
+            </form>
+            <!--</div>-->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+    <span id="updateResult" th:text="${errorMsg}" th:hidden="true"></span>
+    <script language="JavaScript">
+        $(function () {
+            $.ajax({
+                url: "/offering/",
+                type: "post",
+                dataType: "text/json",
+                success: function () {
+                    location.href = "redirect:/offering";
+                },
+                error: function (data) {
+                    if (data != null && data.errorMsg !== "") {
+                        alert(data.errorMsg);
+                    }
+                }
+            })
+        });
+    </script>
+</div>
+
+</body>
+</html>

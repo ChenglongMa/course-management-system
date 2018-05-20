@@ -13,6 +13,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "courseOffering")
 public class CourseOffering {
+    @Column(name = "capacity")
+    private int capacity = 100;
+
+    public CourseOffering() {
+        course = new Course();
+    }
+
+    public CourseOffering(Course course) {
+        this(course, Schedule.currentSchedule());
+    }
+
     @Column(name = "OfferingId")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +40,12 @@ public class CourseOffering {
     private int year;
     @Column(name = "semester")
     private int semester;
-    @Column(name = "capacity")
-    private int capacity;
+
+    public CourseOffering(Course course, Schedule schedule) {
+        this.course = course;
+        year = schedule.getYear();
+        semester = schedule.getSemester();
+    }
 
     public int getOfferingId() {
         return OfferingId;

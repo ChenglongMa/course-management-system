@@ -59,7 +59,9 @@ public class OfferingServiceImpl implements CourseOfferingService {
         if (offering == null) {
             throw new NullPointerException("CourseOffering is null");
         }
-        if (offeringRepo.existsById(offering.getOfferingId())) {
+        List<CourseOffering> offeringschk =
+                offeringRepo.findCourseOfferingsByCourseAndYearAndSemester(offering.getCourse(), offering.getYear(), offering.getSemester());
+        if (offeringRepo.existsById(offering.getOfferingId()) || (offeringschk != null && !offeringschk.isEmpty())) {
             throw new IllegalArgumentException("This offering has existed.");
         }
         return offeringRepo.save(offering);
@@ -67,6 +69,10 @@ public class OfferingServiceImpl implements CourseOfferingService {
 
     @Override
     public CourseOffering save(CourseOffering offering) {
+        List<CourseOffering> offerings = offeringRepo.findCourseOfferingsByCourseAndYearAndSemester(offering.getCourse(), offering.getYear(), offering.getSemester());
+        if (offerings != null && !offerings.isEmpty()) {
+            offering = offerings.get(0);
+        }
         return offeringRepo.save(offering);
     }
 
@@ -82,5 +88,10 @@ public class OfferingServiceImpl implements CourseOfferingService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<CourseOffering> findAll() {
+        return offeringRepo.findAll();
     }
 }

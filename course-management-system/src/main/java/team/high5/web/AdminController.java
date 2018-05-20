@@ -30,12 +30,11 @@ public class AdminController {
     }
 
     @GetMapping
-    public String getAdmins() {
+    public String initial() {
         return "admin";
     }
 
     @GetMapping("/create")
-//    @PostMapping("/create")
     @ResponseBody
     public Admin postAdmin() {
         Admin a = new Admin("e10023","123");

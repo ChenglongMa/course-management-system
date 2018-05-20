@@ -1,6 +1,10 @@
 package team.high5.domain.entities;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,12 +23,9 @@ public class Course {
     private String name;
     @Column(name = "mainTopic")
     private String mainTopic;
+    private static final Logger logger = LoggerFactory.getLogger(Course.class);
     @ManyToMany(cascade = CascadeType.MERGE)
-    private List<Course> prerequisites;
-
-//    @OneToMany(mappedBy = "OfferingId")
-    @Transient
-    private List<CourseOffering> courseOfferings;
+    private List<Course> prerequisites = new ArrayList<>();
 
     public String getCode() {
         return code;
@@ -58,11 +59,26 @@ public class Course {
         this.prerequisites = prerequisites;
     }
 
-    public List<CourseOffering> getCourseOfferings() {
-        return courseOfferings;
+    public void addPrerequisite(Course... courses) {
+        for (Course course : courses) {
+            if (course.equals(this)) {
+                logger.error("Cannot set itself as prerequisite");
+                continue;
+            }
+            if (course.prerequisites.contains(this)) {
+                logger.error("Cannot set course as prerequisite for each other");
+                continue;
+            }
+            prerequisites.add(course);
+        }
     }
 
-    public void setCourseOfferings(List<CourseOffering> courseOfferings) {
-        this.courseOfferings = courseOfferings;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Course other = (Course) obj;
+        return this.code.equals(other.code);
     }
 }

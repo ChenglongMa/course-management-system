@@ -29,4 +29,6 @@ public interface CourseOfferingService {
     void deleteOffering(CourseOffering offering);
 
     boolean deleteIfExist(CourseOffering offering);
+
+    List<CourseOffering> findAll();
 }
