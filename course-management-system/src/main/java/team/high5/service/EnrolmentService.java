@@ -26,7 +26,7 @@ public class EnrolmentService {
     }
 
     public boolean existRNF() {
-        List<Enrolment> list = enrolmentRepo.findAllByResult("RNF");
+        List<Enrolment> list = enrolmentRepo.findAllByResult("");
         return list != null && !list.isEmpty();
     }
 }

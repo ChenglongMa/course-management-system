@@ -13,6 +13,8 @@ import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.*;
 import team.high5.service.*;
 
+import java.util.Scanner;
+
 /**
  * @Author : Charles Ma
  * @Date : 2018/5/9 0009
@@ -29,7 +31,10 @@ public class MainController {
     private final CourseOfferingService offeringService;
     private final EnrolmentService enrolmentService;
     private final ScheduleService scheduleService;
+    public static final Scanner scanner = new Scanner(System.in);
     private Schedule currSchedule;
+    private final AdminController adminController;
+    private Role role;
 
 
     @Autowired
@@ -38,7 +43,7 @@ public class MainController {
                           LecturerService lecturerService,
                           StudentService studentService,
                           CourseService courseService,
-                          CourseOfferingService offeringService, EnrolmentService enrolmentService, ScheduleService scheduleService) {
+                          CourseOfferingService offeringService, EnrolmentService enrolmentService, ScheduleService scheduleService, AdminController adminController, AdminController adminController1) {
         this.adminService = adminService;
         this.coordinatorService = coordinatorService;
         this.lecturerService = lecturerService;
@@ -47,14 +52,12 @@ public class MainController {
         this.offeringService = offeringService;
         this.enrolmentService = enrolmentService;
         this.scheduleService = scheduleService;
-
+        this.adminController = adminController1;
     }
 
-    @GetMapping("/")
-    public String index() {
-        currSchedule = scheduleService.findCurrentSchedule();
-        forTest();
-        return "index";
+    private static void exit() {
+        System.out.println("See you!");
+        System.exit(0);
     }
 
     @PostMapping("/login")
@@ -186,5 +189,169 @@ public class MainController {
             Lecturer lecturer = new Lecturer("e2000" + i, "123");
             lecturerService.save(lecturer);
         }
+    }
+
+    static void newPage() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+    }
+
+    static String getMenu(String... items) {
+        System.out.println("0. Exit.");
+        for (int i = 0; i < items.length; i++) {
+            System.out.println(i + 1 + ". " + items[i]);
+        }
+        String cmd = scanner.nextLine();
+        if (cmd.equals("0")) {
+            exit();
+        }
+        return cmd;
+    }
+
+    @GetMapping("/")
+    public String index(String kwd) {
+        currSchedule = scheduleService.findCurrentSchedule();
+        forTest();
+        if (kwd.equals("test")) {
+            initial();
+        }
+        return "index";
+    }
+
+    public void initial() {
+        try {
+            newPage();
+            System.out.println("Welcome to High 5 Course Management System.");
+            while (true) {
+                System.out.println("Please Select:");
+                int item = Integer.parseInt(getMenu("Login.", "Sign Up."));
+                if (item == 0) {
+                    exit();
+                }
+
+                switch (item) {
+                    case 1:
+                        login();
+                        break;
+                    case 2:
+                        signUp();
+                        break;
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("Oops! We have detected an issue.");
+            System.err.println(ex.getMessage());
+            System.exit(1);
+        }
+    }
+
+    private String[] getProfile(boolean signUp) {
+        String[] items = new String[4];
+        System.out.println("Please enter your User ID:");
+        System.out.print("User ID: ");
+        items[0] = scanner.nextLine().trim();
+
+        if (signUp) {
+            System.out.println("Please enter your User Name: ");
+            items[3] = scanner.nextLine().trim();
+        }
+        System.out.print("Please enter your Password:");
+        items[1] = scanner.nextLine().trim();
+
+        System.out.println("Please select your role:");
+        items[2] = getMenu("Student", "Admin", "Coordinator", "Lecturer");
+        return items;
+    }
+
+    private void login() throws Exception {
+        String[] items = getProfile(false);
+        String userId = items[0];
+        String pwd = items[1];
+        int item = Integer.parseInt(items[2]);
+        User user = null, findUser = null;
+        switch (item) {
+            case 1:
+                user = new Student(userId, pwd);
+                findUser = studentService.findOne((Student) user);
+                role = Role.Student;
+                break;
+            case 2:
+                user = new Admin(userId, pwd);
+                findUser = adminService.findOne((Admin) user);
+                role = Role.Admin;
+                break;
+            case 3:
+                user = new Coordinator(userId, pwd);
+                findUser = coordinatorService.findOne((Coordinator) user);
+                role = Role.Coordinator;
+                break;
+            case 4:
+                user = new Lecturer(userId, pwd);
+                findUser = lecturerService.findOne((Lecturer) user);
+                role = Role.Lecturer;
+                break;
+        }
+        if (user == null || !user.equals(findUser)) {
+            throw new Exception("There is no such user.");
+        }
+
+        System.out.println("Login successfully! Welcome, " + findUser.getName());
+        newPage();
+        switch (role) {
+
+            case Student:
+                StudentController.init();
+                break;
+            case Admin:
+                adminController.init();
+                break;
+            case Coordinator:
+                CoordinatorController.init();
+                break;
+            case Lecturer:
+                LecturerController.init();
+                break;
+        }
+    }
+
+    private void signUp() {
+        String[] profile = getProfile(true);
+        String userId = profile[0];
+        String name = profile[3];
+        String pwd = profile[1];
+        int item = Integer.parseInt(profile[2]);
+        User user;
+        switch (item) {
+            case 1:
+                user = new Student(userId, pwd);
+                user.setName(name);
+                studentService.insert((Student) user);
+                break;
+            case 2:
+                user = new Admin(userId, pwd);
+                user.setName(name);
+                adminService.insert((Admin) user);
+                break;
+            case 3:
+                user = new Coordinator(userId, pwd);
+                user.setName(name);
+                coordinatorService.insert((Coordinator) user);
+                break;
+            case 4:
+                user = new Lecturer(userId, pwd);
+                user.setName(name);
+                lecturerService.insert((Lecturer) user);
+                break;
+        }
+        System.out.println("Sign up successfully! Welcome, " + name);
+    }
+
+
+    private enum Role {
+        Student,
+        Admin,
+        Coordinator,
+        Lecturer
     }
 }

@@ -107,4 +107,13 @@ public class CourseOffering {
     public void setSemester(int semester) {
         this.semester = semester;
     }
+
+    @Override
+    public String toString() {
+        String code = course.getCode();
+        String name = course.getName();
+        String lec = lecturer == null ? "TBA" : lecturer.getName();
+        return String.format("Code: %s Name: %s Capacity: %d Year: %d Semester: %d Lecturer: %s",
+                code, name, capacity, year, semester, lec);
+    }
 }
