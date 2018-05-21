@@ -31,7 +31,11 @@ public class StaffServiceImpl<T extends User> extends UserServiceImpl<T> impleme
 
     @Override
     public List<Enrolment> viewPastPerformance(Student student) {
-        List<Enrolment> enrolments = studentService.findEnrolments(student);
+        Student stu = studentService.findOne(student);
+        if (stu == null) {
+            throw new IllegalArgumentException("There is no such student.");
+        }
+        List<Enrolment> enrolments = stu.getPerformance();
         List<Enrolment> past = new ArrayList<>();
         for (Enrolment enrolment : enrolments) {
             if (enrolment.getOffering().getSchedule().compareTo(Schedule.currentSchedule()) < 0) {

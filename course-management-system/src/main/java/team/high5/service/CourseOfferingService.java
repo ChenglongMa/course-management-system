@@ -2,8 +2,6 @@ package team.high5.service;
 
 import team.high5.domain.entities.Course;
 import team.high5.domain.entities.CourseOffering;
-import team.high5.domain.entities.Schedule;
-import team.high5.domain.user.Lecturer;
 
 import java.util.List;
 
@@ -14,11 +12,10 @@ import java.util.List;
  * @Description : CourseOfferingService
  */
 public interface CourseOfferingService {
-    Lecturer findLecturer(CourseOffering offering);
 
-    Course findCourse(CourseOffering offering);
+    CourseOffering findOne(CourseOffering offering);
 
-    Schedule findSchedule(CourseOffering offering);
+    List<CourseOffering> findByCourse(Course course);
 
     List<CourseOffering> findOfferingsInCurrentSemester();
 
@@ -26,7 +23,7 @@ public interface CourseOfferingService {
 
     CourseOffering save(CourseOffering offering);
 
-    void deleteOffering(CourseOffering offering);
+    void delete(CourseOffering offering);
 
     boolean deleteIfExist(CourseOffering offering);
 

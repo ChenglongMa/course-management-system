@@ -19,9 +19,9 @@ public interface CourseService {
 
     List<Course> findAll();
 
-    Course saveCourse(Course course);
+    Course save(Course course);
 
-    void deleteCourse(Course course);
+    void delete(Course course);
 
     boolean deleteIfExist(Course course);
 }

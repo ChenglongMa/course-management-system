@@ -24,7 +24,7 @@ public class Enrolment {
     @JoinColumn(name = "OfferingId")
     private CourseOffering offering;
     @Column(name = "result")
-    private String result = "RNF";
+    private String result;
 
     public int getEnrolId() {
         return enrolId;

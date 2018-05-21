@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import team.high5.domain.entities.Course;
 import team.high5.domain.entities.CourseOffering;
 import team.high5.domain.entities.Schedule;
-import team.high5.domain.user.Lecturer;
 import team.high5.repository.CourseOfferingRepo;
 import team.high5.service.CourseOfferingService;
 import team.high5.service.ScheduleService;
@@ -31,21 +30,13 @@ public class OfferingServiceImpl implements CourseOfferingService {
     }
 
     @Override
-    public Lecturer findLecturer(CourseOffering offering) {
-        CourseOffering off = offeringRepo.getOne(offering.getOfferingId());
-        return off.getLecturer();
+    public CourseOffering findOne(CourseOffering offering) {
+        return offeringRepo.getOne(offering.getOfferingId());
     }
 
     @Override
-    public Course findCourse(CourseOffering offering) {
-        CourseOffering off = offeringRepo.getOne(offering.getOfferingId());
-        return off.getCourse();
-    }
-
-    @Override
-    public Schedule findSchedule(CourseOffering offering) {
-        CourseOffering off = offeringRepo.getOne(offering.getOfferingId());
-        return off.getSchedule();
+    public List<CourseOffering> findByCourse(Course course) {
+        return offeringRepo.findAllByCourse(course);
     }
 
     @Override
@@ -77,7 +68,7 @@ public class OfferingServiceImpl implements CourseOfferingService {
     }
 
     @Override
-    public void deleteOffering(CourseOffering offering) {
+    public void delete(CourseOffering offering) {
         offeringRepo.delete(offering);
     }
 

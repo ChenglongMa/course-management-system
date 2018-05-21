@@ -156,12 +156,12 @@ public class MainController {
         aa.setName("AA");
         aa.setMainTopic("AA Main Topic");
         aa.addPrerequisite(pf);
-        courseService.saveCourse(ue);
-        courseService.saveCourse(it);
-        courseService.saveCourse(pf);
-        courseService.saveCourse(ap);
-        courseService.saveCourse(sef);
-        courseService.saveCourse(aa);
+        courseService.save(ue);
+        courseService.save(it);
+        courseService.save(pf);
+        courseService.save(ap);
+        courseService.save(sef);
+        courseService.save(aa);
         CourseOffering ueOff = new CourseOffering(ue);
         CourseOffering itOff = new CourseOffering(it);
         itOff.setCapacity(120);

@@ -16,4 +16,6 @@ public interface CourseOfferingRepo extends JpaRepository<CourseOffering, Intege
     List<CourseOffering> findCourseOfferingsByYearAndSemester(int year, int semester);
 
     List<CourseOffering> findCourseOfferingsByCourseAndYearAndSemester(Course course, int year, int semester);
+
+    List<CourseOffering> findAllByCourse(Course course);
 }

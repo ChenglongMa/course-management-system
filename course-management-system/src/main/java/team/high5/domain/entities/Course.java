@@ -23,6 +23,8 @@ public class Course {
     private String name;
     @Column(name = "mainTopic")
     private String mainTopic;
+    @Column(name = "isElective")
+    private boolean isElective;
     private static final Logger logger = LoggerFactory.getLogger(Course.class);
     @ManyToMany(cascade = CascadeType.MERGE)
     private List<Course> prerequisites = new ArrayList<>();
@@ -80,5 +82,13 @@ public class Course {
         }
         Course other = (Course) obj;
         return this.code.equals(other.code);
+    }
+
+    public boolean isElective() {
+        return isElective;
+    }
+
+    public void setElective(boolean elective) {
+        isElective = elective;
     }
 }

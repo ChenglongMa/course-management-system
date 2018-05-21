@@ -61,9 +61,4 @@ public class LecturerServiceImpl extends StaffServiceImpl<Lecturer> implements L
         return true;
     }
 
-    @Override
-    public Lecturer addLecturer(Lecturer lecturer) {
-        return lecturerRepo.save(lecturer);
-    }
-
 }

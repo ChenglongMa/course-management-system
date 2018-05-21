@@ -41,7 +41,12 @@ public class CoordinatorServiceImpl extends UserServiceImpl<Coordinator> impleme
 
     @Override
     public void grantPermission(Student student, int maxLoad) {
-        studentService.setMaxLoad(student, maxLoad);
+        Student stu = studentService.findOne(student);
+        if (stu == null) {
+            throw new IllegalArgumentException("There is no such student.");
+        }
+        stu.setMaxLoad(maxLoad);
+        studentService.save(stu);
     }
 
     @Override

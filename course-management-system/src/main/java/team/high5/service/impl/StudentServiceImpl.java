@@ -10,7 +10,6 @@ import team.high5.repository.StudentRepo;
 import team.high5.service.CourseOfferingService;
 import team.high5.service.ScheduleService;
 import team.high5.service.StudentService;
-import team.high5.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,38 +40,6 @@ public class StudentServiceImpl extends UserServiceImpl<Student> implements Stud
         this.offeringService = offeringService;
     }
 
-//    @Override
-//    public Student findOne(Student student) {
-//        return studentRepo.getOne(student.getUserId());
-//    }
-
-    @Override
-    public List<Enrolment> findEnrolments(Student student) {
-        Student stu = findOne(student);
-        if (stu != null) {
-            return stu.getPerformance();
-        }
-        return null;
-    }
-
-    @Override
-    public int findMaxLoad(Student student) {
-        Student stu = findOne(student);
-        if (stu != null) {
-            return stu.getMaxLoad();
-        }
-        return -1;
-    }
-
-    @Override
-    public int findMaxElectives(Student student) {
-        Student stu = findOne(student);
-        if (stu != null) {
-            return stu.getMaxElectives();
-        }
-        return -1;
-    }
-
     @Override
     public boolean enrol(Student student, CourseOffering offering) {
         boolean res = offering.getSchedule().equals(scheduleService.findCurrentSchedule());
@@ -81,18 +48,6 @@ public class StudentServiceImpl extends UserServiceImpl<Student> implements Stud
         }
         // TODO: 2018/5/9 0009 To be finished.
         return false;
-    }
-
-    @Override
-    public void setMaxElectives(Student student, int maxElectives) {
-        student.setMaxElectives(maxElectives);
-        studentRepo.save(student);
-    }
-
-    @Override
-    public void setMaxLoad(Student student, int maxLoad) {
-        student.setMaxLoad(maxLoad);
-        studentRepo.save(student);
     }
 
     @Override

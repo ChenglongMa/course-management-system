@@ -47,12 +47,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course saveCourse(Course course) {
+    public Course save(Course course) {
         return courseRepo.save(course);
     }
 
     @Override
-    public void deleteCourse(Course course) {
+    public void delete(Course course) {
         courseRepo.delete(course);
     }
 

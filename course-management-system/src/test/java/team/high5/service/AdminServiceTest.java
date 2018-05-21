@@ -59,7 +59,7 @@ public class AdminServiceTest {
         course.setCode("ISYS1117");
         course.setName("SEF");
         course.setMainTopic("Software Engineering Fundamentals");
-        course = courseService.saveCourse(course);
+        course = courseService.save(course);
         logger.debug("Create new course " + course.getCode());
         offering = new CourseOffering();
         offering.setCourse(course);
@@ -95,7 +95,7 @@ public class AdminServiceTest {
         Lecturer lecturer = new Lecturer("e1001", "123");
         Lecturer lecturerExp = lecturerService.findOne(lecturer);
         if (lecturerExp == null) {
-            lecturer = lecturerService.addLecturer(lecturer);
+            lecturer = lecturerService.insert(lecturer);
         } else lecturer = lecturerExp;
         Assert.assertNotEquals(lecturer, offering.getLecturer());
         offering = adminService.assignLecturer(offering, lecturer);

@@ -12,5 +12,4 @@ import team.high5.domain.entities.Schedule;
  * @Description :
  */
 public interface ScheduleRepo extends JpaRepository<Schedule, Integer> {
-    Schedule findScheduleBySchId(int id);
 }
