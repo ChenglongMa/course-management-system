@@ -1,8 +1,11 @@
 package team.high5.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import team.high5.domain.entities.Course;
 import team.high5.domain.user.Coordinator;
 import team.high5.domain.user.Student;
+import team.high5.repository.CoordinatorRepo;
 
 /**
  * course-management-system
@@ -12,10 +15,36 @@ import team.high5.domain.user.Student;
  * @Time : 15:02
  * @Description :
  */
-public interface CoordinatorService extends UserService<Coordinator>{
-    Course addCourse(Course course);
+@Service
+public class CoordinatorService extends UserService<Coordinator> {
 
-    void grantPermission(Student student,int maxLoad);
+    private final CourseService courseService;
+    private final StudentService studentService;
+    private final CoordinatorRepo coordinatorRepo;
 
-    void grantExemption(Student student, Course course);
+
+    @Autowired
+    public CoordinatorService(CourseService courseService, StudentService studentService, CoordinatorRepo coordinatorRepo) {
+        super(coordinatorRepo);
+        this.courseService = courseService;
+        this.studentService = studentService;
+        this.coordinatorRepo = coordinatorRepo;
+    }
+
+    public Course addCourse(Course course) {
+        return courseService.addCourse(course);
+    }
+
+    public void grantPermission(Student student, int maxLoad) {
+        Student stu = studentService.findOne(student);
+        if (stu == null) {
+            throw new IllegalArgumentException("There is no such student.");
+        }
+        stu.setMaxLoad(maxLoad);
+        studentService.save(stu);
+    }
+
+    public void grantExemption(Student student, Course course) {
+        // TODO: 2018/5/10 0010 To be finished.
+    }
 }
