@@ -34,6 +34,9 @@ public class MainController {
     private final EnrolmentService enrolmentService;
     private final ScheduleService scheduleService;
     private final AdminController adminController;
+    private final CoordinatorController coordinatorController;
+    private final LecturerController lecturerController;
+    private final StudentController studentController;
     private Schedule currSchedule;
     private Role role;
 
@@ -44,7 +47,13 @@ public class MainController {
                           LecturerService lecturerService,
                           StudentService studentService,
                           CourseService courseService,
-                          CourseOfferingService offeringService, EnrolmentService enrolmentService, ScheduleService scheduleService, AdminController adminController, AdminController adminController1) {
+                          CourseOfferingService offeringService,
+                          EnrolmentService enrolmentService,
+                          ScheduleService scheduleService,
+                          AdminController adminController,
+                          CoordinatorController coordinatorController,
+                          LecturerController lecturerController,
+                          StudentController studentController) {
         this.adminService = adminService;
         this.coordinatorService = coordinatorService;
         this.lecturerService = lecturerService;
@@ -53,7 +62,10 @@ public class MainController {
         this.offeringService = offeringService;
         this.enrolmentService = enrolmentService;
         this.scheduleService = scheduleService;
-        this.adminController = adminController1;
+        this.adminController = adminController;
+        this.coordinatorController = coordinatorController;
+        this.lecturerController = lecturerController;
+        this.studentController = studentController;
     }
 
     static int getSubMenu(String... items) {
@@ -319,16 +331,16 @@ public class MainController {
         switch (role) {
 
             case Student:
-                StudentController.init();
+                studentController.init();
                 break;
             case Admin:
                 adminController.init();
                 break;
             case Coordinator:
-                CoordinatorController.init();
+                coordinatorController.init();
                 break;
             case Lecturer:
-                LecturerController.init();
+                lecturerController.init();
                 break;
         }
     }

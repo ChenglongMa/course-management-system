@@ -1,5 +1,7 @@
 package team.high5.web;
 
+import org.springframework.stereotype.Controller;
+
 /**
  * course-management-system
  *
@@ -8,8 +10,9 @@ package team.high5.web;
  * @Time : 17:26
  * @Description :
  */
+@Controller
 public class CoordinatorController {
-    static void init() {
+    void init() {
 
     }
 }
