@@ -25,8 +25,20 @@ public class EnrolmentService {
         this.enrolmentRepo = enrolmentRepo;
     }
 
+    public List<Enrolment> findAllByResult(String res) {
+        return enrolmentRepo.findAllByResult(res);
+    }
+
     public boolean existRNF() {
-        List<Enrolment> list = enrolmentRepo.findAllByResult("");
+        List<Enrolment> list = findAllByResult("");
         return list != null && !list.isEmpty();
+    }
+
+    public Enrolment save(Enrolment enrolment) {
+        return enrolmentRepo.save(enrolment);
+    }
+
+    public void saveAll(List<Enrolment> enrolments) {
+        enrolmentRepo.saveAll(enrolments);
     }
 }

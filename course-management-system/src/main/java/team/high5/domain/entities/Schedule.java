@@ -135,4 +135,9 @@ public class Schedule implements Comparable<Schedule> {
             return this.semester - o.semester;
         } else return this.year - o.year;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Year:%s Semester %s Week %s", year, semester, week);
+    }
 }

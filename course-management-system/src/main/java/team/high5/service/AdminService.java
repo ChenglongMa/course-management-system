@@ -3,10 +3,13 @@ package team.high5.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.high5.domain.entities.CourseOffering;
+import team.high5.domain.entities.Enrolment;
 import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Admin;
 import team.high5.domain.user.Lecturer;
 import team.high5.repository.AdminRepo;
+
+import java.util.List;
 
 /**
  * @Author : Charles Ma
@@ -19,16 +22,18 @@ public class AdminService extends StaffService<Admin> {
     private final AdminRepo adminRepo;
     private final CourseOfferingService offeringService;
     private final ScheduleService scheduleService;
+    private final EnrolmentService enrolmentService;
 
     @Autowired
     public AdminService(AdminRepo adminRepo,
                         CourseOfferingService offeringService,
                         ScheduleService scheduleService,
-                        StudentService studentService) {
+                        StudentService studentService, EnrolmentService enrolmentService) {
         super(studentService, adminRepo);
         this.adminRepo = adminRepo;
         this.offeringService = offeringService;
         this.scheduleService = scheduleService;
+        this.enrolmentService = enrolmentService;
     }
 
 
@@ -55,6 +60,14 @@ public class AdminService extends StaffService<Admin> {
 
     public void advanceSystem() {
         scheduleService.advance();
+    }
+
+    public void markRNF() {
+        List<Enrolment> enrolments = enrolmentService.findAllByResult("");
+        for (Enrolment enrolment : enrolments) {
+            enrolment.setResult("RNF");
+        }
+        enrolmentService.saveAll(enrolments);
     }
 
 }

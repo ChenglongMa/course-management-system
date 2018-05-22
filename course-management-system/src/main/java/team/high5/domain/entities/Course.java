@@ -91,4 +91,10 @@ public class Course {
     public void setElective(boolean elective) {
         isElective = elective;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Code: %s Name: %s Main Topic: %s.",
+                code, name, mainTopic);
+    }
 }

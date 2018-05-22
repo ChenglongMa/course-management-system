@@ -116,4 +116,9 @@ public abstract class User {
         User other = (User) obj;
         return this.userId.equals(other.userId) && this.password.equals(other.password);
     }
+
+    @Override
+    public String toString() {
+        return String.format("UserID: %s Name: %s", userId, name);
+    }
 }

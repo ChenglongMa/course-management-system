@@ -23,6 +23,7 @@ import java.util.Scanner;
  */
 @Controller
 public class MainController {
+    public static final Scanner scanner = new Scanner(System.in);
     private final AdminService adminService;
     private final CoordinatorService coordinatorService;
     private final LecturerService lecturerService;
@@ -31,9 +32,8 @@ public class MainController {
     private final CourseOfferingService offeringService;
     private final EnrolmentService enrolmentService;
     private final ScheduleService scheduleService;
-    public static final Scanner scanner = new Scanner(System.in);
-    private Schedule currSchedule;
     private final AdminController adminController;
+    private Schedule currSchedule;
     private Role role;
 
 
@@ -58,6 +58,25 @@ public class MainController {
     private static void exit() {
         System.out.println("See you!");
         System.exit(0);
+    }
+
+    static void newPage() {
+        for (int i = 0; i < 2; i++) {
+            System.out.println();
+        }
+    }
+
+    static int getMenu(String... items) {
+        System.out.println();
+        System.out.println("0. Exit.");
+        for (int i = 0; i < items.length; i++) {
+            System.out.println(i + 1 + ". " + items[i]);
+        }
+        int cmd = scanner.nextInt();
+        if (cmd == 0) {
+            exit();
+        }
+        return cmd;
     }
 
     @PostMapping("/login")
@@ -187,26 +206,9 @@ public class MainController {
         offeringService.save(aaOffFut);
         for (int i = 0; i < 10; i++) {
             Lecturer lecturer = new Lecturer("e2000" + i, "123");
+            lecturer.setName("Lec 00" + i + 1);
             lecturerService.save(lecturer);
         }
-    }
-
-    static void newPage() {
-        for (int i = 0; i < 10; i++) {
-            System.out.println();
-        }
-    }
-
-    static String getMenu(String... items) {
-        System.out.println("0. Exit.");
-        for (int i = 0; i < items.length; i++) {
-            System.out.println(i + 1 + ". " + items[i]);
-        }
-        String cmd = scanner.nextLine();
-        if (cmd.equals("0")) {
-            exit();
-        }
-        return cmd;
     }
 
     @GetMapping("/")
@@ -220,12 +222,13 @@ public class MainController {
     }
 
     public void initial() {
-        try {
-            newPage();
-            System.out.println("Welcome to High 5 Course Management System.");
-            while (true) {
+        while (true) {
+            try {
+                Thread.sleep(500);
+                newPage();
+                System.out.println("Welcome to High 5 Course Management System.");
                 System.out.println("Please Select:");
-                int item = Integer.parseInt(getMenu("Login.", "Sign Up."));
+                int item = getMenu("Login.", "Sign Up.");
                 if (item == 0) {
                     exit();
                 }
@@ -238,11 +241,11 @@ public class MainController {
                         signUp();
                         break;
                 }
+            } catch (Exception ex) {
+                System.err.println("Oops! We have detected an issue.");
+                System.err.println(ex.getMessage());
+                System.err.println("Please try again.");
             }
-        } catch (Exception ex) {
-            System.err.println("Oops! We have detected an issue.");
-            System.err.println(ex.getMessage());
-            System.exit(1);
         }
     }
 
@@ -250,17 +253,17 @@ public class MainController {
         String[] items = new String[4];
         System.out.println("Please enter your User ID:");
         System.out.print("User ID: ");
-        items[0] = scanner.nextLine().trim();
+        items[0] = scanner.next().trim();
 
         if (signUp) {
             System.out.println("Please enter your User Name: ");
-            items[3] = scanner.nextLine().trim();
+            items[3] = scanner.next().trim();
         }
         System.out.print("Please enter your Password:");
-        items[1] = scanner.nextLine().trim();
+        items[1] = scanner.next().trim();
 
         System.out.println("Please select your role:");
-        items[2] = getMenu("Student", "Admin", "Coordinator", "Lecturer");
+        items[2] = String.valueOf(getMenu("Student", "Admin", "Coordinator", "Lecturer"));
         return items;
     }
 
@@ -293,7 +296,7 @@ public class MainController {
                 break;
         }
         if (user == null || !user.equals(findUser)) {
-            throw new Exception("There is no such user.");
+            throw new Exception("Incorrect username or password.");
         }
 
         System.out.println("Login successfully! Welcome, " + findUser.getName());
