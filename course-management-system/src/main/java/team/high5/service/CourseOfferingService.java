@@ -55,9 +55,9 @@ public class CourseOfferingService {
     public CourseOffering save(CourseOffering offering) {
         List<CourseOffering> offerings = offeringRepo.findCourseOfferingsByCourseAndYearAndSemester(offering.getCourse(), offering.getYear(), offering.getSemester());
         if (offerings != null && !offerings.isEmpty()) {
-            offering = offerings.get(0);
+            offering.setOfferingId(offerings.get(0).getOfferingId());
         }
-        return offeringRepo.save(offering);
+        return offeringRepo.saveAndFlush(offering);
     }
 
     public void delete(CourseOffering offering) {

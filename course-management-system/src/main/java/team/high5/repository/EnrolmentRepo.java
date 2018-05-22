@@ -1,7 +1,9 @@
 package team.high5.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import team.high5.domain.entities.CourseOffering;
 import team.high5.domain.entities.Enrolment;
+import team.high5.domain.user.Student;
 
 import java.util.List;
 
@@ -16,4 +18,6 @@ import java.util.List;
 public interface EnrolmentRepo extends JpaRepository<Enrolment, Integer> {
 
     List<Enrolment> findAllByResult(String result);
+
+    Enrolment findEnrolmentByStudentAndOffering(Student student, CourseOffering offering);
 }

@@ -43,7 +43,7 @@ public class CourseService {
     }
 
     public Course save(Course course) {
-        return courseRepo.save(course);
+        return courseRepo.saveAndFlush(course);
     }
 
     public void delete(Course course) {

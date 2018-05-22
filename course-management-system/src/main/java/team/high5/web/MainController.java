@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import team.high5.domain.entities.Course;
 import team.high5.domain.entities.CourseOffering;
+import team.high5.domain.entities.Enrolment;
 import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.*;
 import team.high5.service.*;
@@ -55,9 +56,13 @@ public class MainController {
         this.adminController = adminController1;
     }
 
-    private static void exit() {
-        System.out.println("See you!");
-        System.exit(0);
+    static int getSubMenu(String... items) {
+        System.out.println();
+        System.out.println("0. Log Out.");
+        for (int i = 0; i < items.length; i++) {
+            System.out.println(i + 1 + ". " + items[i]);
+        }
+        return MainController.scanner.nextInt();
     }
 
     static void newPage() {
@@ -66,7 +71,15 @@ public class MainController {
         }
     }
 
-    static int getMenu(String... items) {
+    private void exit() {
+        System.out.println("See you!");
+        Schedule currSchedule = new Schedule(2018, 1);
+        Schedule.setCurrentSchedule(currSchedule);
+        scheduleService.saveCurrentSchedule();
+        System.exit(0);
+    }
+
+    int getMainMenu(String... items) {
         System.out.println();
         System.out.println("0. Exit.");
         for (int i = 0; i < items.length; i++) {
@@ -196,7 +209,7 @@ public class MainController {
         offeringService.save(itOff);
         offeringService.save(pfOff);
         offeringService.save(apOff);
-        offeringService.save(sefOff);
+        sefOff = offeringService.save(sefOff);
         offeringService.save(aaOff);
         Schedule past = new Schedule(2016, 2);
         CourseOffering sefOffPast = new CourseOffering(sef, past);
@@ -209,6 +222,11 @@ public class MainController {
             lecturer.setName("Lec 00" + i + 1);
             lecturerService.save(lecturer);
         }
+        Student stu = new Student("s000", "123");
+        stu.setName("Jerry");
+        Student s = studentService.save(stu);
+        Enrolment enrol = new Enrolment(s, sefOff);
+        enrolmentService.save(enrol);
     }
 
     @GetMapping("/")
@@ -228,10 +246,7 @@ public class MainController {
                 newPage();
                 System.out.println("Welcome to High 5 Course Management System.");
                 System.out.println("Please Select:");
-                int item = getMenu("Login.", "Sign Up.");
-                if (item == 0) {
-                    exit();
-                }
+                int item = getMainMenu("Login.", "Sign Up.");
 
                 switch (item) {
                     case 1:
@@ -263,7 +278,7 @@ public class MainController {
         items[1] = scanner.next().trim();
 
         System.out.println("Please select your role:");
-        items[2] = String.valueOf(getMenu("Student", "Admin", "Coordinator", "Lecturer"));
+        items[2] = String.valueOf(getMainMenu("Student", "Admin", "Coordinator", "Lecturer"));
         return items;
     }
 

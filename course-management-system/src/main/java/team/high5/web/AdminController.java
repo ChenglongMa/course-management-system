@@ -72,7 +72,7 @@ public class AdminController {
     public void init() throws InterruptedException {
         while (true) {
             Thread.sleep(500);
-            int cmd = MainController.getMenu("View Course Offerings.", "Add new Course Offering.", "Assign Lecturer.", "Advance System.", "Log out");
+            int cmd = MainController.getSubMenu("View Course Offerings.", "Add new Course Offering.", "Assign Lecturer.", "Advance System.");
             try {
                 switch (cmd) {
                     case 1:
@@ -87,7 +87,7 @@ public class AdminController {
                     case 4:
                         advanceSystem();
                         break;
-                    case 5:
+                    default:
                         return;
                 }
             } catch (Exception ex) {

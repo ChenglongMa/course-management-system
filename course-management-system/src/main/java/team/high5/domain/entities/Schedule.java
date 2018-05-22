@@ -24,9 +24,9 @@ public class Schedule implements Comparable<Schedule> {
     @Column(name = "year")
     private int year;
     @Column(name = "semester")
-    private int semester;
+    private int semester = 1;
     @Column(name = "week")
-    private int week;
+    private int week = 1;
 
     public Schedule() {
     }
@@ -81,6 +81,7 @@ public class Schedule implements Comparable<Schedule> {
     }
 
     public static void setCurrentSchedule(Schedule currentSchedule) {
+        currentSchedule.setSchId(1);
         Schedule.currentSchedule = currentSchedule;
     }
 

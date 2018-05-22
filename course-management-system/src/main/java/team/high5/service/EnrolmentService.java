@@ -2,9 +2,12 @@ package team.high5.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team.high5.domain.entities.CourseOffering;
 import team.high5.domain.entities.Enrolment;
+import team.high5.domain.user.Student;
 import team.high5.repository.EnrolmentRepo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,11 +33,22 @@ public class EnrolmentService {
     }
 
     public boolean existRNF() {
-        List<Enrolment> list = findAllByResult("");
+        List<Enrolment> list = new ArrayList<>();// findAllByResult("");
+        for (Enrolment e : enrolmentRepo.findAll()) {
+            if (e.getResult() == null || e.getResult().equals("")) {
+                list.add(e);
+            }
+        }
         return list != null && !list.isEmpty();
     }
 
     public Enrolment save(Enrolment enrolment) {
+        Student stu = enrolment.getStudent();
+        CourseOffering offering = enrolment.getOffering();
+        Enrolment enrol = enrolmentRepo.findEnrolmentByStudentAndOffering(stu, offering);
+        if (enrol != null) {
+            enrolment.setEnrolId(enrol.getEnrolId());
+        }
         return enrolmentRepo.save(enrolment);
     }
 

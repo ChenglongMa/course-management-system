@@ -14,17 +14,27 @@ import javax.persistence.*;
 @Table(name = "enrolment")
 public class Enrolment {
     @Id
-//    @Column(name = "enrolId")
+    @Column(name = "enrolId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int enrolId;
+    @Column(name = "result")
+    private String result = "";
+
+    public Enrolment() {
+        student = new Student();
+        offering = new CourseOffering();
+    }
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "userId")
     private Student student;
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "OfferingId")
     private CourseOffering offering;
-    @Column(name = "result")
-    private String result;
+
+    public Enrolment(Student student, CourseOffering offering) {
+        this.student = student;
+        this.offering = offering;
+    }
 
     public int getEnrolId() {
         return enrolId;
