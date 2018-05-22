@@ -219,24 +219,6 @@
             <!--</div>-->
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
-    <span id="updateResult" th:text="${errorMsg}" th:hidden="true"></span>
-    <script language="JavaScript">
-        $(function () {
-            $.ajax({
-                url: "/offering/",
-                type: "post",
-                dataType: "text/json",
-                success: function () {
-                    location.href = "redirect:/offering";
-                },
-                error: function (data) {
-                    if (data != null && data.errorMsg !== "") {
-                        alert(data.errorMsg);
-                    }
-                }
-            })
-        });
-    </script>
 </div>
 
 </body>

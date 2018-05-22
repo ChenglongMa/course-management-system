@@ -15,9 +15,7 @@ import team.high5.service.AdminService;
 import team.high5.service.CourseOfferingService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * course-management-system
@@ -68,15 +66,9 @@ public class OfferingController {
     }
 
     @PostMapping(value = "/create")
-    public Map<String, String> postOffering(@ModelAttribute CourseOffering offering) {
-        Map<String, String> map = new HashMap<>();
-        try {
-            adminService.addCourseOffering(offering);
-            map.put("href", "redirect:/offering");
-        } catch (Exception e) {
-            map.put("errorMsg", e.getMessage());
-        }
-        return map;
+    public String postOffering(@ModelAttribute CourseOffering offering) {
+        adminService.addCourseOffering(offering);
+        return "redirect:/offering";
     }
 
 }
