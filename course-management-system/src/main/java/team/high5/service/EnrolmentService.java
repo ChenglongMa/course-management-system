@@ -42,6 +42,10 @@ public class EnrolmentService {
         return list != null && !list.isEmpty();
     }
 
+    public Enrolment enrolCourse(Student student, CourseOffering offering) {
+        Enrolment enrolment = new Enrolment(student, offering);
+        return save(enrolment);
+    }
     public Enrolment save(Enrolment enrolment) {
         Student stu = enrolment.getStudent();
         CourseOffering offering = enrolment.getOffering();
@@ -54,5 +58,9 @@ public class EnrolmentService {
 
     public void saveAll(List<Enrolment> enrolments) {
         enrolmentRepo.saveAll(enrolments);
+    }
+
+    public List<Enrolment> getCurrEnrolments(CourseOffering offering) {
+        return enrolmentRepo.findAllByOffering(offering);
     }
 }

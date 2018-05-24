@@ -331,7 +331,7 @@ public class MainController {
         switch (role) {
 
             case Student:
-                studentController.init();
+                studentController.init((Student) findUser);
                 break;
             case Admin:
                 adminController.init();
