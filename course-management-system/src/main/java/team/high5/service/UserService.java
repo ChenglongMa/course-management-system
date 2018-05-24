@@ -30,6 +30,11 @@ public class UserService<T extends User> {
         return op.orElse(null);
     }
 
+    public T findOne(String userId) {
+        Optional<T> op = userRepo.findById(userId);
+        return op.orElse(null);
+    }
+
     public List<T> findAll() {
         return userRepo.findAll();
     }

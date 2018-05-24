@@ -63,4 +63,16 @@ public class EnrolmentService {
     public List<Enrolment> getCurrEnrolments(CourseOffering offering) {
         return enrolmentRepo.findAllByOffering(offering);
     }
+
+    public List<Enrolment> findAllByStudent(Student student) {
+        return enrolmentRepo.findAllByStudent(student);
+    }
+
+    public List<CourseOffering> findOffering(Student student) {
+        List<CourseOffering> offerings = new ArrayList<>();
+        for (Enrolment enrolment : enrolmentRepo.findAllByStudent(student)) {
+            offerings.add(enrolment.getOffering());
+        }
+        return offerings;
+    }
 }

@@ -15,6 +15,9 @@ import team.high5.service.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static team.high5.web.MainController.getSubMenu;
+import static team.high5.web.MainController.scanner;
+
 /**
  * @Author : Charles Ma
  * @Date : 2018/5/9 0009
@@ -58,21 +61,10 @@ public class AdminController {
         return adminService.save(a);
     }
 
-//    @GetMapping("/advance")
-//    @ResponseBody
-//    public Schedule advanceSystem() {
-//        if (enrolmentService.existRNF()) {
-//            System.out.println("存在结果为RNF");
-//
-//        }
-//        adminService.advanceSystem();
-//        return Schedule.currentSchedule();
-//    }
-
     public void init() throws InterruptedException {
         while (true) {
             Thread.sleep(500);
-            int cmd = MainController.getSubMenu("View Course Offerings.", "Add new Course Offering.", "Assign Lecturer.", "Advance System.");
+            int cmd = getSubMenu("View Course Offerings.", "Add new Course Offering.", "Assign Lecturer.", "Advance System.");
             try {
                 switch (cmd) {
                     case 1:
@@ -133,25 +125,25 @@ public class AdminController {
     private void addCourseOffering() throws Exception {
         printAllCourse();
         System.out.println("Please select Course you want to process");
-        int index = MainController.scanner.nextInt() - 1;
+        int index = scanner.nextInt() - 1;
         if (courses.size() <= index) {
             throw new Exception("You tried to access an array out of bounds");
         }
         Course course = courses.get(index);
         CourseOffering offering = new CourseOffering(course);
         System.out.println("Please specify the year of the offering:");
-        offering.setYear(MainController.scanner.nextInt());
+        offering.setYear(scanner.nextInt());
         System.out.println("Then the semester:");
-        offering.setSemester(MainController.scanner.nextInt());
+        offering.setSemester(scanner.nextInt());
         System.out.println("Please specify the capacity of the offering:");
-        offering.setCapacity(MainController.scanner.nextInt());
+        offering.setCapacity(scanner.nextInt());
         adminService.addCourseOffering(offering);
         if (!offering.getSchedule().equals(Schedule.currentSchedule())) {
             return;
         }
         System.out.println("Do you want to assign a lecturer to this offering now? (y/n)");
-        String res = MainController.scanner.next().toLowerCase();
-        if (res.equals("y")) {
+        String cmd = scanner.next().toLowerCase();
+        if (cmd.equals("y")) {
             assignLecturer(offering);
         }
     }
@@ -160,14 +152,14 @@ public class AdminController {
         if (offering.getLecturer() != null) {
             System.out.println("The Course Offering has had lecturer.");
             System.out.println("Do you want to continue? (y/n)");
-            String cmd = MainController.scanner.next().toLowerCase();
+            String cmd = scanner.next().toLowerCase();
             if (cmd.equals("n")) {
                 return;
             }
         }
         printAllLecturer();
         System.out.println("Please select Lecturer.");
-        int index = MainController.scanner.nextInt() - 1;
+        int index = scanner.nextInt() - 1;
         if (lecturers.size() <= index) {
             throw new Exception("You tried to access an array out of bounds");
         }
@@ -179,7 +171,7 @@ public class AdminController {
     private void assignLecturer() throws Exception {
         printAllOffering();
         System.out.println("Please select Course Offering you want to process");
-        int index = MainController.scanner.nextInt() - 1;
+        int index = scanner.nextInt() - 1;
         if (offerings.size() <= index) {
             throw new Exception("You tried to access an array out of bounds");
         }
@@ -191,7 +183,7 @@ public class AdminController {
         if (enrolmentService.existRNF()) {
             System.err.println("There are some students with OUTSTANDING results which would be marked as \"RNF\".");
             System.err.println("Please Confirm (y/n):");
-            String cmd = MainController.scanner.next().toLowerCase();
+            String cmd = scanner.next().toLowerCase();
             if (cmd.equals("n")) {
                 return;
             }

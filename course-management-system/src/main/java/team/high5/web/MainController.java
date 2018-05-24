@@ -242,13 +242,15 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String index(String kwd) {
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/test")
+    public void test() {
         currSchedule = scheduleService.findCurrentSchedule();
         forTest();
-        if (kwd.equals("test")) {
-            initial();
-        }
-        return "index";
+        initial();
     }
 
     public void initial() {
