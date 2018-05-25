@@ -60,29 +60,9 @@ public class LecturerService extends StaffService<Lecturer> {
         return true;
     }
 
-    public boolean uploadResult(Lecturer lecturer, CourseOffering offering, String userId, String result) {
-        if (Schedule.currentSchedule().getWeek() != 12) {
-            throw new IllegalArgumentException("Cannot upload result until the end of the semester.");
-        }
-        Student stu = studentService.findOne(userId);
-        if (stu == null) {
-            throw new IllegalArgumentException("There is no such student.");
-        }
-        if (!offering.getLecturer().equals(lecturer)) {
-            throw new IllegalArgumentException("This offering doesn't belong to this lecturer.");
-        }
-        List<Enrolment> enrolments = enrolmentService.findAllByOfferingAndStudent(offering, stu);
-        if (enrolments == null) {
-            throw new IllegalArgumentException("Cannot find the enrolment of this student.");
-        }
-        for (Enrolment enrolment : enrolments) {
-            if (enrolment.getOffering().equals(offering)) {
-                enrolment.setResult(result);
-                enrolmentService.save(enrolment);
-                return true;
-            }
-        }
-        throw new IllegalArgumentException("Cannot find such student in this offering");
+    public void uploadResult(Enrolment enrolment, String result) {
+        enrolment.setResult(result);
+        enrolmentService.save(enrolment);
     }
 
 }
