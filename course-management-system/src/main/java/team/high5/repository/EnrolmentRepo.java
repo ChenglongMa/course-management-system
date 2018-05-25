@@ -24,4 +24,6 @@ public interface EnrolmentRepo extends JpaRepository<Enrolment, Integer> {
     List<Enrolment> findAllByOffering(CourseOffering offering);
 
     List<Enrolment> findAllByStudent(Student student);
+
+    List<Enrolment> findAllByOfferingAndStudent(CourseOffering offering, Student student);
 }

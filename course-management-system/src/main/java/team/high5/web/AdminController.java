@@ -98,7 +98,7 @@ public class AdminController {
 
     }
 
-    private void viewPerformance() throws Exception {
+    private void viewPerformance() {
         System.out.println("Please enter the Student ID:");
         String userId = scanner.next();
         List<Enrolment> performance = adminService.viewPastPerformance(userId);

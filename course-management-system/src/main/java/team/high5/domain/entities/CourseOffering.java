@@ -113,4 +113,13 @@ public class CourseOffering {
         return String.format("Code: %s Name: %s Capacity: %d Year: %d Semester: %d Lecturer: %s",
                 code, name, capacity, year, semester, lec);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        CourseOffering other = (CourseOffering) obj;
+        return this.course.equals(other.course) && this.getSchedule().equals(other.getSchedule());
+    }
 }

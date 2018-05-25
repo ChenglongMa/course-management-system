@@ -348,7 +348,7 @@ public class MainController {
                 coordinatorController.init();
                 break;
             case Lecturer:
-                lecturerController.init();
+                lecturerController.init((Lecturer) findUser);
                 break;
         }
     }

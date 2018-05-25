@@ -76,4 +76,8 @@ public class EnrolmentService {
         }
         return offerings;
     }
+
+    public List<Enrolment> findAllByOfferingAndStudent(CourseOffering offering, Student student) {
+        return enrolmentRepo.findAllByOfferingAndStudent(offering, student);
+    }
 }
