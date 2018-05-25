@@ -50,7 +50,7 @@ The repository package is the
 
 The project started at model classes mixed the **data** and the **logic** before which broke the MVC principle so that I divided them into **domain** and **service** package which are responsible for **data** and **logic** respectively. In addition, as the requirement of the project, the project introduced **MySQL database** and **spring boot framework** to build a integrated **web-base** system.
 
-## TO DO
+## *TO DO [done]*
 
 There are still some problems in the project so that we need to keep refactoring it.
 
@@ -67,6 +67,18 @@ There are still some problems in the project so that we need to keep refactoring
 6. Build and test our project.
 7. Merge all branches to **master** if there is no bug through test.
 8. Have fun!
+
+## Contribution Sheet
+
+|     Name     | Percentage |
+| :----------: | :--------: |
+| Chenglong Ma |    40%     |
+|              |            |
+|              |            |
+|              |            |
+|              |            |
+
+
 
 ------------------------------------------------------------------
 
