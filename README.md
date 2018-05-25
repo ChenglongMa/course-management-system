@@ -70,13 +70,13 @@ There are still some problems in the project so that we need to keep refactoring
 
 ## Contribution Sheet
 
-|     Name     | Percentage |
-| :----------: | :--------: |
-| Chenglong Ma |    40%     |
-|              |            |
-|              |            |
-|              |            |
-|              |            |
+|        Name/ID        | Percentage |
+| :-------------------: | :--------: |
+| Chenglong Ma-s3629862 |    40%     |
+|                       |            |
+|                       |            |
+|                       |            |
+|                       |            |
 
 
 
