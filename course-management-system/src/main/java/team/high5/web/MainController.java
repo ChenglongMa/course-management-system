@@ -216,6 +216,7 @@ public class MainController {
         CourseOffering apOff = new CourseOffering(ap);
         apOff.setCapacity(50);
         CourseOffering sefOff = new CourseOffering(sef);
+
         CourseOffering aaOff = new CourseOffering(aa);
         offeringService.save(ueOff);
         offeringService.save(itOff);
@@ -227,7 +228,7 @@ public class MainController {
         CourseOffering sefOffPast = new CourseOffering(sef, past);
         Schedule future = new Schedule(2020, 1);
         CourseOffering aaOffFut = new CourseOffering(aa, future);
-        offeringService.save(sefOffPast);
+        sefOffPast = offeringService.save(sefOffPast);
         offeringService.save(aaOffFut);
         for (int i = 0; i < 10; i++) {
             Lecturer lecturer = new Lecturer("e2000" + i, "123");
@@ -239,6 +240,11 @@ public class MainController {
         Student s = studentService.save(stu);
         Enrolment enrol = new Enrolment(s, sefOff);
         enrolmentService.save(enrol);
+        Student sPast = new Student("p000", "123");
+        sPast.setName("Past");
+        sPast = studentService.save(sPast);
+        Enrolment enPast = new Enrolment(sPast, sefOffPast);
+        enrolmentService.save(enPast);
     }
 
     @GetMapping("/")
