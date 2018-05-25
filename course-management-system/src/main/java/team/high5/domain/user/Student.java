@@ -63,11 +63,15 @@ public class Student extends User {
     public void addEnrolments(Enrolment... enrolments) {
         for (Enrolment enrolment : enrolments) {
             if (!enrolment.getStudent().equals(this)) {
-                logger.error("This enrolment does not belong to this student.");
+                System.err.println("This enrolment does not belong to this student.");
+                System.err.printf("Enrolment Detail:\nCourseOffering: %s\nStudent: %s\n",
+                        enrolment.getOffering(), enrolment.getStudent().getName());
                 continue;
             }
             if (!enrolment.getOffering().getSchedule().equals(Schedule.currentSchedule())) {
-                logger.error("Cannot enrol courses not this semester.");
+                System.err.println("Cannot enrol courses not this semester.");
+                System.err.printf("Enrolment Detail:\nCourseOffering: %s\nStudent: %s\n",
+                        enrolment.getOffering(), enrolment.getStudent().getName());
                 continue;
             }
             performance.add(enrolment);

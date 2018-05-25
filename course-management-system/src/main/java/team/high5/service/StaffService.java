@@ -20,19 +20,19 @@ import java.util.List;
 @Service
 public class StaffService<T extends User> extends UserService<T> {
     private final StudentService studentService;
+    private final EnrolmentService enrolmentService;
 
     @Autowired
-    public StaffService(StudentService studentService, UserRepo<T> userRepo) {
+    public StaffService(StudentService studentService,
+                        UserRepo<T> userRepo,
+                        EnrolmentService enrolmentService) {
         super(userRepo);
         this.studentService = studentService;
+        this.enrolmentService = enrolmentService;
     }
 
-    public List<Enrolment> viewPastPerformance(Student student) {
-        Student stu = studentService.findOne(student);
-        if (stu == null) {
-            throw new IllegalArgumentException("There is no such student.");
-        }
-        List<Enrolment> enrolments = stu.getPerformance();
+    private List<Enrolment> viewPastPerformance(Student stu) {
+        List<Enrolment> enrolments = enrolmentService.findAllByStudent(stu);
         List<Enrolment> past = new ArrayList<>();
         for (Enrolment enrolment : enrolments) {
             if (enrolment.getOffering().getSchedule().compareTo(Schedule.currentSchedule()) < 0) {
@@ -42,4 +42,11 @@ public class StaffService<T extends User> extends UserService<T> {
         return past;
     }
 
+    public List<Enrolment> viewPastPerformance(String userId) {
+        Student stu = studentService.findOne(userId);
+        if (stu == null) {
+            throw new IllegalArgumentException("There is no such student.");
+        }
+        return viewPastPerformance(stu);
+    }
 }

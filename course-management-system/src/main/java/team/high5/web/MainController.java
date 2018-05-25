@@ -91,7 +91,7 @@ public class MainController {
         System.exit(0);
     }
 
-    int getMainMenu(String... items) {
+    private int getMainMenu(String... items) {
         System.out.println();
         System.out.println("0. Exit.");
         for (int i = 0; i < items.length; i++) {

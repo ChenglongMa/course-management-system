@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 @MappedSuperclass
 public abstract class User {
     @Transient
-    protected static final Logger logger = LoggerFactory.getLogger(User.class);
+    static final Logger logger = LoggerFactory.getLogger(User.class);
     @Id
     @Column(name = "userId")
     private String userId;

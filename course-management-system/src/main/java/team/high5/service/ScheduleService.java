@@ -46,7 +46,6 @@ public class ScheduleService {
     }
 
     public void advance() {
-        findCurrentSchedule();
         Schedule.advance();
         saveCurrentSchedule();
     }

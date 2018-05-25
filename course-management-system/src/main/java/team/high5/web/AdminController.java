@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.high5.domain.entities.Course;
 import team.high5.domain.entities.CourseOffering;
+import team.high5.domain.entities.Enrolment;
 import team.high5.domain.entities.Schedule;
 import team.high5.domain.user.Admin;
 import team.high5.domain.user.Lecturer;
@@ -33,17 +34,19 @@ public class AdminController {
     private final CourseOfferingService offeringService;
     private final CourseService courseService;
     private final LecturerService lecturerService;
+    private final StudentService studentService;
     List<CourseOffering> offerings = new ArrayList<>();
     List<Course> courses = new ArrayList<>();
     List<Lecturer> lecturers = new ArrayList<>();
 
     @Autowired
-    public AdminController(AdminService adminService, EnrolmentService enrolmentService, CourseOfferingService offeringService, CourseService courseService, LecturerService lecturerService) {
+    public AdminController(AdminService adminService, EnrolmentService enrolmentService, CourseOfferingService offeringService, CourseService courseService, LecturerService lecturerService, StudentService studentService) {
         this.adminService = adminService;
         this.enrolmentService = enrolmentService;
         this.offeringService = offeringService;
         this.courseService = courseService;
         this.lecturerService = lecturerService;
+        this.studentService = studentService;
     }
 
     @GetMapping
@@ -64,7 +67,7 @@ public class AdminController {
     public void init() throws InterruptedException {
         while (true) {
             Thread.sleep(500);
-            int cmd = getSubMenu("View Course Offerings.", "Add new Course Offering.", "Assign Lecturer.", "Advance System.");
+            int cmd = getSubMenu("View Course Offerings.", "Add new Course Offering.", "Assign Lecturer.", "Advance System.", "View Past Performance.");
             try {
                 switch (cmd) {
                     case 1:
@@ -79,6 +82,9 @@ public class AdminController {
                     case 4:
                         advanceSystem();
                         break;
+                    case 5:
+                        viewPerformance();
+                        break;
                     default:
                         return;
                 }
@@ -90,6 +96,19 @@ public class AdminController {
         }
 
 
+    }
+
+    private void viewPerformance() throws Exception {
+        System.out.println("Please enter the Student ID:");
+        String userId = scanner.next();
+        List<Enrolment> performance = adminService.viewPastPerformance(userId);
+        if (performance.isEmpty()) {
+            System.err.println("There is no enrolment for this student.");
+            return;
+        }
+        for (Enrolment enrolment : performance) {
+            System.out.println("Enrolment: " + enrolment);
+        }
     }
 
     private void printAllOffering() throws Exception {

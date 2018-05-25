@@ -16,7 +16,7 @@ public class Schedule implements Comparable<Schedule> {
     @Transient
     public static final int WEEK_COUNT = 12;
     @Transient
-    private static Schedule currentSchedule = null;
+    private static Schedule currSchedule = null;
     @Id
     @Column(name = "schId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,10 +42,10 @@ public class Schedule implements Comparable<Schedule> {
      * @return
      */
     public static Schedule currentSchedule() {
-        if (currentSchedule == null) {
+        if (currSchedule == null) {
             throw new NullPointerException("Need to be updated from database.");
         }
-        return currentSchedule;
+        return currSchedule;
     }
 
     public int getSchId() {
@@ -82,7 +82,7 @@ public class Schedule implements Comparable<Schedule> {
 
     public static void setCurrentSchedule(Schedule currentSchedule) {
         currentSchedule.setSchId(1);
-        Schedule.currentSchedule = currentSchedule;
+        Schedule.currSchedule = currentSchedule;
     }
 
     /**
@@ -91,25 +91,25 @@ public class Schedule implements Comparable<Schedule> {
      * @return the current schedule
      */
     public static Schedule advance() {
-        int week = currentSchedule.getWeek();
+        int week = currSchedule.getWeek();
         if (week <= 0)
             throw new IllegalArgumentException(String.format("Wrong Week: %s", week));
         if (week < WEEK_COUNT) {
-            currentSchedule.setWeek(week + 1);
+            currSchedule.setWeek(week + 1);
         } else {
-            int semester = currentSchedule.getSemester();
+            int semester = currSchedule.getSemester();
             if (semester <= 0)
                 throw new IllegalArgumentException(String.format("Wrong Semester: %s", semester));
             if (semester >= SEMESTER_COUNT) {
-                int year = currentSchedule.getYear();
-                currentSchedule.setYear(year + 1);
-                currentSchedule.setSemester(1);
+                int year = currSchedule.getYear();
+                currSchedule.setYear(year + 1);
+                currSchedule.setSemester(1);
             } else {
-                currentSchedule.setSemester(semester + 1);
+                currSchedule.setSemester(semester + 1);
             }
-            currentSchedule.setWeek(1);
+            currSchedule.setWeek(1);
         }
-        return currentSchedule;
+        return currSchedule;
     }
 
     /**

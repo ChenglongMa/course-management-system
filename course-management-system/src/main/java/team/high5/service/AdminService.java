@@ -29,7 +29,7 @@ public class AdminService extends StaffService<Admin> {
                         CourseOfferingService offeringService,
                         ScheduleService scheduleService,
                         StudentService studentService, EnrolmentService enrolmentService) {
-        super(studentService, adminRepo);
+        super(studentService, adminRepo, enrolmentService);
         this.adminRepo = adminRepo;
         this.offeringService = offeringService;
         this.scheduleService = scheduleService;

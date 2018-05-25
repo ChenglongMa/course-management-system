@@ -27,8 +27,9 @@ public class LecturerService extends StaffService<Lecturer> {
     @Autowired
     public LecturerService(StudentService studentService,
                            ScheduleService scheduleService,
-                           LecturerRepo lecturerRepo) {
-        super(studentService, lecturerRepo);
+                           LecturerRepo lecturerRepo,
+                           EnrolmentService enrolmentService) {
+        super(studentService, lecturerRepo, enrolmentService);
         this.studentService = studentService;
         this.scheduleService = scheduleService;
         this.lecturerRepo = lecturerRepo;

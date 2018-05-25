@@ -67,4 +67,9 @@ public class Enrolment {
     public void setResult(String result) {
         this.result = result;
     }
+
+    @Override
+    public String toString() {
+        return String.format("CourseOffering: %s Student: %s ", offering, student.getName());
+    }
 }
