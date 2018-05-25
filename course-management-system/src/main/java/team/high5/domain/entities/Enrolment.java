@@ -19,17 +19,17 @@ public class Enrolment {
     private int enrolId;
     @Column(name = "result")
     private String result = "";
-
-    public Enrolment() {
-        student = new Student();
-        offering = new CourseOffering();
-    }
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "userId")
     private Student student;
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "OfferingId")
     private CourseOffering offering;
+
+    public Enrolment() {
+        student = new Student();
+        offering = new CourseOffering();
+    }
 
     public Enrolment(Student student, CourseOffering offering) {
         this.student = student;

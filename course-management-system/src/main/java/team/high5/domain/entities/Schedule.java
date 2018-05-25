@@ -48,38 +48,6 @@ public class Schedule implements Comparable<Schedule> {
         return currSchedule;
     }
 
-    public int getSchId() {
-        return schId;
-    }
-
-    public void setSchId(int schId) {
-        this.schId = schId;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getSemester() {
-        return semester;
-    }
-
-    public void setSemester(int semester) {
-        this.semester = semester;
-    }
-
-    public int getWeek() {
-        return week;
-    }
-
-    public void setWeek(int week) {
-        this.week = week;
-    }
-
     public static void setCurrentSchedule(Schedule currentSchedule) {
         currentSchedule.setSchId(1);
         Schedule.currSchedule = currentSchedule;
@@ -110,6 +78,38 @@ public class Schedule implements Comparable<Schedule> {
             currSchedule.setWeek(1);
         }
         return currSchedule;
+    }
+
+    public int getSchId() {
+        return schId;
+    }
+
+    public void setSchId(int schId) {
+        this.schId = schId;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
     }
 
     /**

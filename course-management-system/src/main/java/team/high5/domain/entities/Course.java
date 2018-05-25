@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "course")
 public class Course {
+    private static final Logger logger = LoggerFactory.getLogger(Course.class);
     @Id
     @Column(name = "code")
     private String code;
@@ -25,7 +26,6 @@ public class Course {
     private String mainTopic;
     @Column(name = "isElective")
     private boolean isElective;
-    private static final Logger logger = LoggerFactory.getLogger(Course.class);
     @ManyToMany(cascade = CascadeType.MERGE)
     private List<Course> prerequisites = new ArrayList<>();
 

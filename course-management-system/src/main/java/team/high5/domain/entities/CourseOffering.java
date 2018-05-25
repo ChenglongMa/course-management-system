@@ -15,6 +15,20 @@ import javax.persistence.*;
 public class CourseOffering {
     @Column(name = "capacity")
     private int capacity = 100;
+    @Column(name = "OfferingId")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int OfferingId;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "code")
+    private Course course;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "userId")
+    private Lecturer lecturer;
+    @Column(name = "year")
+    private int year;
+    @Column(name = "semester")
+    private int semester;
 
     public CourseOffering() {
         course = new Course();
@@ -23,23 +37,6 @@ public class CourseOffering {
     public CourseOffering(Course course) {
         this(course, Schedule.currentSchedule());
     }
-
-    @Column(name = "OfferingId")
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int OfferingId;
-
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "code")
-    private Course course;
-
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "userId")
-    private Lecturer lecturer;
-    @Column(name = "year")
-    private int year;
-    @Column(name = "semester")
-    private int semester;
 
     public CourseOffering(Course course, Schedule schedule) {
         this.course = course;

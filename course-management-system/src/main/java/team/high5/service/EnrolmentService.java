@@ -46,6 +46,7 @@ public class EnrolmentService {
         Enrolment enrolment = new Enrolment(student, offering);
         return save(enrolment);
     }
+
     public Enrolment save(Enrolment enrolment) {
         Student stu = enrolment.getStudent();
         CourseOffering offering = enrolment.getOffering();
