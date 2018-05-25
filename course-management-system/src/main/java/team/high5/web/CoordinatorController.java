@@ -60,16 +60,20 @@ public class CoordinatorController {
     }
 
     private void addCourse() {
-        Course newCourse = new Course();
-        newCourse.setElective(false);
-        System.out.println();
-        System.out.println("Please insert the course name.");
-        newCourse.setName(scanner.next());
-        System.out.println();
-        System.out.println("Please insert the course code.");
-        newCourse.setCode(scanner.next());
-        System.out.println();
-        courseService.addCourse(newCourse);
+        try {
+            Course newCourse = new Course();
+            newCourse.setElective(false);
+            System.out.println();
+            System.out.println("Please insert the course name.");
+            newCourse.setName(scanner.next());
+            System.out.println();
+            System.out.println("Please insert the course code.");
+            newCourse.setCode(scanner.next());
+            System.out.println();
+            courseService.addCourse(newCourse);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         this.init();
     }
 
