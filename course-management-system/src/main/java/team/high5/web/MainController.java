@@ -249,6 +249,7 @@ public class MainController {
 
     @GetMapping("/")
     public String index() {
+        currSchedule = scheduleService.findCurrentSchedule();
         return "index";
     }
 
