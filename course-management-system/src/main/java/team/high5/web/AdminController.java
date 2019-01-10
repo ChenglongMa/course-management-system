@@ -40,7 +40,12 @@ public class AdminController {
     List<Lecturer> lecturers = new ArrayList<>();
 
     @Autowired
-    public AdminController(AdminService adminService, EnrolmentService enrolmentService, CourseOfferingService offeringService, CourseService courseService, LecturerService lecturerService, StudentService studentService) {
+    public AdminController(AdminService adminService,
+                           EnrolmentService enrolmentService,
+                           CourseOfferingService offeringService,
+                           CourseService courseService,
+                           LecturerService lecturerService,
+                           StudentService studentService) {
         this.adminService = adminService;
         this.enrolmentService = enrolmentService;
         this.offeringService = offeringService;
@@ -64,6 +69,7 @@ public class AdminController {
         return adminService.save(a);
     }
 
+    @Deprecated
     public void init() throws InterruptedException {
         while (true) {
             Thread.sleep(500);

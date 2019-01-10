@@ -68,6 +68,7 @@ public class MainController {
         this.studentController = studentController;
     }
 
+    @Deprecated
     static int getSubMenu(String... items) {
         System.out.println();
         System.out.println("0. Log Out.");
@@ -77,12 +78,14 @@ public class MainController {
         return MainController.scanner.nextInt();
     }
 
+    @Deprecated
     static void newPage() {
         for (int i = 0; i < 2; i++) {
             System.out.println();
         }
     }
 
+    @Deprecated
     private void exit() {
         System.out.println("See you!");
         Schedule currSchedule = new Schedule(2018, 1);
@@ -91,6 +94,7 @@ public class MainController {
         System.exit(0);
     }
 
+    @Deprecated
     private int getMainMenu(String... items) {
         System.out.println();
         System.out.println("0. Exit.");
@@ -175,6 +179,7 @@ public class MainController {
         }
     }
 
+    @Deprecated
     private void forTest() {
         Course ue = new Course();
         ue.setCode("c1002");
@@ -249,17 +254,18 @@ public class MainController {
 
     @GetMapping("/")
     public String index() {
-        currSchedule = scheduleService.findCurrentSchedule();
         return "index";
     }
 
     @GetMapping("/test")
+    @Deprecated
     public void test() {
         currSchedule = scheduleService.findCurrentSchedule();
         forTest();
         initial();
     }
 
+    @Deprecated
     public void initial() {
         while (true) {
             try {
@@ -285,6 +291,7 @@ public class MainController {
         }
     }
 
+    @Deprecated
     private String[] getProfile(boolean signUp) {
         String[] items = new String[4];
         System.out.println("Please enter your User ID:");
@@ -303,6 +310,7 @@ public class MainController {
         return items;
     }
 
+    @Deprecated
     private void login() throws Exception {
         String[] items = getProfile(false);
         String userId = items[0];
@@ -354,6 +362,7 @@ public class MainController {
         }
     }
 
+    @Deprecated
     private void signUp() {
         String[] profile = getProfile(true);
         String userId = profile[0];
